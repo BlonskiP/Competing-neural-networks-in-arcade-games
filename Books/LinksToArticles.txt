@@ -1,0 +1,2 @@
+http://karpathy.github.io/2016/05/31/rl/
+https://blogs.unity3d.com/2017/09/19/introducing-unity-machine-learning-agents/
