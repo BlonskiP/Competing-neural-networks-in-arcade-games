@@ -59,7 +59,7 @@ public class SwordAttack : MonoBehaviour
             }
             if(agent.isLearning)
             {
-                if (hitCounter > 3)
+                if (hitCounter > 4)
                 {
                     agent.Done();
                     hitCounter = 0;
