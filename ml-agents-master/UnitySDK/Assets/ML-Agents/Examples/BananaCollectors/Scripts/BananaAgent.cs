@@ -175,7 +175,6 @@ public class BananaAgent : Agent
         else
         {
             myLaser.transform.localScale = new Vector3(0f, 0f, 0f);
-
         }
     }
 
@@ -226,6 +225,7 @@ public class BananaAgent : Agent
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
+        Debug.Log(vectorAction[0] + " " + vectorAction[1]);
         MoveAgent(vectorAction);
     }
 

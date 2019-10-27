@@ -92,6 +92,5 @@ namespace MLAgents
             float z = radius * Mathf.Sin(DegreeToRadian(angle));
             return new Vector3(x, 0f, z);
         }
-
     }
 }

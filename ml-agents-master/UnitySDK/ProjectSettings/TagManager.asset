@@ -26,6 +26,9 @@ TagManager:
   - pyramid
   - switchOn
   - stone
+  - Team1
+  - Team2
+  - ArenaWall
   layers:
   - Default
   - TransparentFX
