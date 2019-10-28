@@ -30,6 +30,7 @@ public class WarriorAgent : Agent
     #region ML_AGENTS METHODS
     public override void InitializeAgent()
     {
+        base.InitializeAgent();
         getComponents();
         actualAction = ActionState.Idle;
     }
@@ -55,12 +56,14 @@ public class WarriorAgent : Agent
     }
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        int moveForward = Mathf.FloorToInt(vectorAction[0]);
-        int rotation = Mathf.FloorToInt(vectorAction[1]);
-        int newAction = Mathf.FloorToInt(vectorAction[2]);
-        checkIfCanSeeEnemy(); //reward if can see enemy
-        int rotateDir = 0;
         if (canChangeAction && actualAction != ActionState.Dead)
+        {
+            int moveForward = Mathf.FloorToInt(vectorAction[0]);
+            int rotation = Mathf.FloorToInt(vectorAction[1]);
+            int newAction = Mathf.FloorToInt(vectorAction[2]);
+            //reward if can see enemy
+            int rotateDir = 0;
+
             switch (newAction)
             {
                 case 0:
@@ -87,30 +90,34 @@ public class WarriorAgent : Agent
                     }
                 case 4:
                     {//Charge!!
-                        Charge();
+                        if (stamina > 50)
+                        {
+                            Charge();
+                            stamina -= 50;
+                        }
                         break;
                     }
             }
-        else
-        {
-            switch ((int)actualAction)
-            {
-                case 3: { Charge(); break; }
-            }
+                if (actualAction != ActionState.Charge && actualAction != ActionState.Attacking && actualAction != ActionState.Dead)
+                {
+                    if (rotation == 1)
+                    {
+                        rotateDir = 1;
+                    }
+                    else if (rotation == 2)
+                    {
+                        rotateDir = -1;
+                    }
+                    Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, rotateDir * 100, 0) * Time.deltaTime);
+                    rig.MoveRotation(rig.rotation * deltaRotation);
+                    
+                }
         }
-        if (actualAction != ActionState.Charge && actualAction != ActionState.Attacking && actualAction != ActionState.Dead)
+        else if(actualAction==ActionState.Charge)
         {
-            if (rotation == 1)
-            {
-                rotateDir = 1;
-            }
-            else if (rotation == 2)
-            {
-                rotateDir = -1;
-            }
-            Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, rotateDir * 100, 0) * Time.deltaTime);
-            rig.MoveRotation(rig.rotation * deltaRotation);
+            Charge(); //continue charge anim
         }
+        checkIfCanSeeEnemy();
     }
     #endregion
     #region Monobehaviour methods
@@ -159,7 +166,6 @@ public class WarriorAgent : Agent
             if (enemiesProperties[enemiesArr.Length + 1] > 0)
             {
                 float distanceToEnemy = enemiesProperties[enemiesArr.Length + 1] * viewDistance;
-                Gizmos.DrawWireSphere(transform.position, distanceToEnemy);
                 if (distanceToEnemy < 2.1 || distanceToEnemy > 1)
                 {
                     AddReward(0.1f); //reward for having enemy in melee range
@@ -297,6 +303,7 @@ public class WarriorAgent : Agent
     {
         weapon.DisableCollision();
         canChangeAction = true;
+        actualAction = ActionState.Idle;
     }
     public void resetActions()
     {

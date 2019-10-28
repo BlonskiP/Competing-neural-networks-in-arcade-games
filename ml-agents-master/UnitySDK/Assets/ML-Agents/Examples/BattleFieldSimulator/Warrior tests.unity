@@ -394,6 +394,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7802976623394186066, guid: bcb90343e51e22148a33f8c11f6afcc0,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802976623394186066, guid: bcb90343e51e22148a33f8c11f6afcc0,
+        type: 3}
+      propertyPath: agentParameters.maxStep
+      value: 5000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcb90343e51e22148a33f8c11f6afcc0, type: 3}
 --- !u!1001 &4486169801385672430

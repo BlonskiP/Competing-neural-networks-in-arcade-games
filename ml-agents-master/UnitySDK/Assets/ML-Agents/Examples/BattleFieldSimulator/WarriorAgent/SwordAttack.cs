@@ -46,24 +46,19 @@ public class SwordAttack : MonoBehaviour
             if (target != null)
             {
                 if (target.agentTeam.EnemyTeamName != agent.agentTeam.TeamName)
+                {
                     target.GetDmg(25);
-                if (target.health < 0)
-                {
-                    agent.AddReward(2f);
+                    if (target.health < 0)
+                    {
+                        agent.AddReward(1f);
+
+                    }
+                   
                 }
+           
             }
-            if(agent.isLearning)
-            {
-                if (hitCounter > 4)
-                {
-                    agent.Done();
-                    hitCounter = 0;
-                }
-                
-            }
-            
+            agent.Done();
         }
-      //  Debug.Log("Attack check");
     }
 
 }
