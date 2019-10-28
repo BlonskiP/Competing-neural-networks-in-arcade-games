@@ -57,17 +57,20 @@ public class SimpleWarriorAgent : Agent
     {
 
         int teamNumber = 1;
-        int enemyNumber = 1;
+        int enemyNumber = 2;
         if (TeamName == "Team2") { teamNumber = 2; enemyNumber = 1; }
         AddVectorObs(teamNumber);
+        AddVectorObs(enemyNumber);
         AddVectorObs(health);
         AddVectorObs(stamina);
+        AddVectorObs(viewDistance);
         AddVectorObs(transform.position);
         AddVectorObs(transform.rotation);
         AddVectorObs((int)actualAction);
-        AddVectorObs(ray.Perceive(viewDistance, rayAngles, detectableObjects, 0f, 0f));
-        AddVectorObs(AcademyBattleField.getTeamCount(TeamName));
-        AddVectorObs(AcademyBattleField.getTeamCount(enemyTeam));
+        AddVectorObs(Convert.ToInt32(canChangeAction));
+        AddVectorObs(ray.Perceive(viewDistance, rayAngles, detectableObjects, 0f, 0f)); //Sight
+        AddVectorObs(AcademyBattleField.getTeamCount(TeamName)); //Number of enemies alive
+        AddVectorObs(AcademyBattleField.getTeamCount(enemyTeam)); //Number of ally alive
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -162,6 +165,12 @@ public class SimpleWarriorAgent : Agent
             staminaRegen();
             blockCost();
             setAnimation();
+            if(transform.position.y<0)
+            {
+                Vector3 tempPosition = transform.position;
+                tempPosition.y = 1;
+                transform.position = tempPosition;
+            }
         }
 
     }
@@ -248,9 +257,10 @@ public class SimpleWarriorAgent : Agent
         if (actualAction != ActionState.Blocking && health > 0)
         {
             health -= dmg;
+            SetReward(-0.1f);
             if (health <= 0)
             {
-                SetReward(-1);
+                SetReward(-0.3f);
                 Death();
             }
         }
@@ -265,6 +275,7 @@ public class SimpleWarriorAgent : Agent
         if (!isLearning)
         {
             actualAction = ActionState.Dead;
+            health = 0;
             canChangeAction = false;
             Done();
             setAnimation();
@@ -297,10 +308,6 @@ public class SimpleWarriorAgent : Agent
                 SetReward(0.1f); //reward for having enemy in sight
                 enemiesSeen++;
             }
-        }
-        if (enemiesSeen == 0 && AcademyBattleField.getTeamCount(enemyTeam)>0)
-        {
-            SetReward(-0.05f); //punish for not seeing enemy that is battle
         }
     }
 }

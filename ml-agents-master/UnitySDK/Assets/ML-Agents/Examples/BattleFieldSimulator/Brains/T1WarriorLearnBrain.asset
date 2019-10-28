@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: T1WarriorLearnBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 38
+    vectorObservationSize: 41
     numStackedVectorObservations: 1
-    vectorActionSize: 030000000300000003000000
+    vectorActionSize: 030000000300000005000000
     cameraResolutions: []
     vectorActionDescriptions:
-    - 
-    - 
-    - 
+    - Movment
+    - Rotation
+    - New Action
     vectorActionSpaceType: 0
-  model: {fileID: 11400000, guid: 56a0af8a89cdf304a9caa6ffca600ff2, type: 3}
+  model: {fileID: 0}
   inferenceDevice: 0
