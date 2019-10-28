@@ -49,7 +49,7 @@ public class SwordAttack : MonoBehaviour
                     target.GetDmg(25);
                 if (target.health < 0)
                 {
-                    agent.SetReward(2f);
+                    agent.AddReward(2f);
                 }
             }
             if(agent.isLearning)
