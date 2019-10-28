@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: T2WarriorLearnBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 41
+    vectorObservationSize: 30
     numStackedVectorObservations: 1
     vectorActionSize: 030000000300000005000000
     cameraResolutions: []

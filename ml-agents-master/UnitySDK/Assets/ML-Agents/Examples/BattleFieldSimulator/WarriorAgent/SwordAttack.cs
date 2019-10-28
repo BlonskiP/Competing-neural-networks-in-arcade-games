@@ -6,14 +6,13 @@ using UnityEngine;
 public class SwordAttack : MonoBehaviour
 {
     BoxCollider swordBoxCollider;
-    public string TeamName;
-    public SimpleWarriorAgent agent;
+    public WarriorAgent agent;
     int hitCounter = 0;
     private void Awake()
     {
         swordBoxCollider = GetComponent<BoxCollider>();
         GetComponent<Collider>().enabled = false;
-        agent = GetComponentInParent<SimpleWarriorAgent>();
+        agent = GetComponentInParent<WarriorAgent>();
     }
     // Start is called before the first frame update
     void Start()
@@ -37,20 +36,16 @@ public class SwordAttack : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        //SimpleWarriorAgent target = collider.gameObject.GetComponent<SimpleWarriorAgent>();
-        string enemyTag = "Team2";
-        if (agent.tag == enemyTag)
-            enemyTag = "Team1";
-        if(collider.tag==enemyTag)
+        if(collider.tag==agent.agentTeam.EnemyTeamName)
         {
-            agent.SetReward(1);
+            agent.AddReward(1);
             hitCounter++;
 
             //Debug.Log(Vector3.Distance(agent.transform.position, collider.transform.position).ToString());
-            SimpleWarriorAgent target = collider.gameObject.GetComponent<SimpleWarriorAgent>();
+            WarriorAgent target = collider.gameObject.GetComponent<WarriorAgent>();
             if (target != null)
             {
-                if (target.TeamName != this.TeamName)
+                if (target.agentTeam.EnemyTeamName != agent.agentTeam.TeamName)
                     target.GetDmg(25);
                 if (target.health < 0)
                 {

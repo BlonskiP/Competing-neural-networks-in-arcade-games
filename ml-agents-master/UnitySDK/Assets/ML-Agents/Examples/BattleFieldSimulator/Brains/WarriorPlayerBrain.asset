@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: WarriorPlayerBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 38
+    vectorObservationSize: 30
     numStackedVectorObservations: 1
-    vectorActionSize: 030000000300000003000000
+    vectorActionSize: 030000000300000005000000
     cameraResolutions: []
     vectorActionDescriptions:
-    - 
-    - 
-    - 
+    - Movment
+    - Rotation
+    - New Action
     vectorActionSpaceType: 0
   keyContinuousPlayerActions: []
   axisContinuousPlayerActions: []
