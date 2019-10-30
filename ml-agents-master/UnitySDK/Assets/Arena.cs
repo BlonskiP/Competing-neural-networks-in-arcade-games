@@ -16,7 +16,8 @@ public class Arena : MonoBehaviour
         Agent agent = other.gameObject.GetComponent<Agent>();
         if(agent !=null)
         {
-            agent.AgentReset();
+            agent.AddReward(-0.1f);
+            agent.Done();          
         }
     }
 }

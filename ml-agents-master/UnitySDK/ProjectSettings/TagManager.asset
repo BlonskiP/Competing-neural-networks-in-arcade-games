@@ -29,6 +29,7 @@ TagManager:
   - Team1
   - Team2
   - ArenaWall
+  - SwordCollider
   layers:
   - Default
   - TransparentFX

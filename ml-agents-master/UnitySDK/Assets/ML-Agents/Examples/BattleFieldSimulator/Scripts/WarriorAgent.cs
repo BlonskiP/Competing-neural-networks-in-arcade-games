@@ -78,8 +78,7 @@ public class WarriorAgent : Agent
                         break;
                     }
                 case 2:
-                    { //Attack
-                        actualAction = ActionState.Attacking;
+                    { //
                         Attack();
                         break;
                     }
@@ -93,7 +92,7 @@ public class WarriorAgent : Agent
                         if (stamina > 50)
                         {
                             Charge();
-                            stamina -= 50;
+                           
                         }
                         break;
                     }
@@ -117,6 +116,7 @@ public class WarriorAgent : Agent
         {
             Charge(); //continue charge anim
         }
+        AddReward(-1f / agentParameters.maxStep);
         checkIfCanSeeEnemy();
     }
     #endregion
@@ -176,8 +176,12 @@ public class WarriorAgent : Agent
     }
     private void blockCost()
     {
-        if (actualAction == ActionState.Blocking)
+        if (actualAction == ActionState.Blocking && stamina>0)
+        {
             stamina -= blockStaminaCost * Time.deltaTime;
+            if (stamina < 0) actualAction = ActionState.Idle;
+        }
+       
     }
     private void staminaRegen()
     {
@@ -219,6 +223,7 @@ public class WarriorAgent : Agent
         if (canChangeAction)
         {
             actualAction = ActionState.Charge;
+            stamina -= 50;
             canChangeAction = false;
         }
         if (actualAction == ActionState.Charge)
@@ -248,11 +253,12 @@ public class WarriorAgent : Agent
     }
     private void Block()
     {
-        if (stamina > 0)
+        if (stamina > 10)
         {
-            stamina -= 10;
             actualAction = ActionState.Blocking;
         }
+        else
+        { actualAction = ActionState.Idle; }
     }
     public void Death()
     {
