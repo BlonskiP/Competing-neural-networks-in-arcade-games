@@ -18,11 +18,11 @@ public class ActionWarriorAgent : Agent
     private Team team;
     [HideInInspector]
     public bool isActionDone = true;
-    int animationID = 0;
-    public int viewDistance = 20;
+    int hitCounter = 0;
+    public int viewDistance = 30;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        
+        AddReward(-1/5000f);
         int[] actionParams = { };
         if(isActionDone)
         {//can change action
@@ -34,7 +34,7 @@ public class ActionWarriorAgent : Agent
                 }
                 else
                 { 
-                    AddReward(-0.1f);//punish for choosing not existing action
+                    AddReward(-0.3f);//punish for choosing not existing action
                     isActionDone = true;
                 }
         }
@@ -44,7 +44,7 @@ public class ActionWarriorAgent : Agent
                 actualAction.Continue(this,out isActionDone, actionParams);
             else
             {
-                AddReward(-0.1f); //punish for continuing not existing action
+             AddReward(-0.1f); //punish for continuing not existing action
             }
         }
     }
@@ -64,6 +64,7 @@ public class ActionWarriorAgent : Agent
         team.registerNewMember(this);
         anim = GetComponent<Animator>();
         rayPerc = GetComponent<RayPerception3D>();
+        rig = GetComponent<Rigidbody>();
         foreach (var edge in GetComponentsInChildren<BoxCollider>())
         {
             if (edge.tag == "SwordCollider")
@@ -76,14 +77,22 @@ public class ActionWarriorAgent : Agent
     public override void CollectObservations()
     {
         base.CollectObservations();
-        AddVectorObs(actualAction.ActionKey);
+        if (actualAction != null)
+            AddVectorObs(actualAction.ActionKey);
+        else
+            AddVectorObs(0);
         AddVectorObs(isActionDone);
         AddVectorObs(rayPerc.Perceive(viewDistance, AcademyBattleField.rayAngles, AcademyBattleField.detectableObjects, 0, 0));
         AddVectorObs((int)team.TeamTag);
+        AddVectorObs(rig.rotation);
+        Vector3 localVelocity = transform.InverseTransformDirection(rig.velocity);
+        AddVectorObs(localVelocity.x);
+        AddVectorObs(localVelocity.z);
     }
     public override void AgentReset()
     {
         base.AgentReset();
+        hitCounter = 0;
         transform.position = startingPosition;
     }
 
@@ -102,9 +111,12 @@ public class ActionWarriorAgent : Agent
     // Update is called once per frame
     void Update()
     {
+        //Should not have logic here
+    }
+    private void FixedUpdate()
+    {
         setAnimation();
     }
-
     public void EnableAttack()
     {
 
@@ -121,8 +133,13 @@ public class ActionWarriorAgent : Agent
         {
             if (AcademyBattleField.detectableObjects.Contains(other.tag))
             {
-                AddReward(1.0f);
-                Done();
+                AddReward(actualAction.succesReward);
+                hitCounter++;
+                if(hitCounter>5)
+                {
+                    Done();
+                }
+                
             }
         }
     }

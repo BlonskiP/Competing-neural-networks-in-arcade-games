@@ -16,4 +16,4 @@ MonoBehaviour:
   succesReward: 0
   AnimationBoolName: 
   direction: -1
-  moveSpeed: 50
+  moveSpeed: 1

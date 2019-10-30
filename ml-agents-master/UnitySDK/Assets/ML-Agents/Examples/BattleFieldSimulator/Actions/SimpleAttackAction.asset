@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SimpleAttackAction
   m_EditorClassIdentifier: 
   ActionKey: 4
-  succesReward: 0
+  succesReward: 1
   AnimationBoolName: 

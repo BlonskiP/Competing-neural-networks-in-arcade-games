@@ -7,13 +7,13 @@ using UnityEngine;
 public class MoveAction : Action
 {
     public int direction = 1;
-    public int moveSpeed = 100;
+    public int moveSpeed = 2;
     public override void Perform(Agent agent, out bool isActionDone, params int[] param)
     {
         Rigidbody rig = agent.gameObject.GetComponent<Rigidbody>();
         Vector3 dirToGo = Vector3.zero;
         dirToGo = agent.transform.forward * direction;
-        rig.AddForce(dirToGo * moveSpeed);
+        rig.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
         isActionDone = true;
     }
 

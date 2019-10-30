@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ActionWarriorBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 28
-    numStackedVectorObservations: 1
+    vectorObservationSize: 34
+    numStackedVectorObservations: 5
     vectorActionSize: 06000000
     cameraResolutions: []
     vectorActionDescriptions:
     - 
     vectorActionSpaceType: 0
   model: {fileID: 0}
-  inferenceDevice: 0
+  inferenceDevice: 1
