@@ -15,7 +15,7 @@ public class RotateAction : Action
     {
         isActionDone = true;
         Rigidbody rig = agent.GetComponent<Rigidbody>();
-        Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, dir * 300, 0) * Time.deltaTime);
+        Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, dir * 100, 0) * Time.deltaTime);
         rig.MoveRotation(rig.rotation * deltaRotation);
 
     }

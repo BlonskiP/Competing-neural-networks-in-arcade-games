@@ -325,9 +325,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broadcastHub:
     broadcastingBrains:
-    - {fileID: 11400000, guid: e7dea25abb564d746bdd9066b170f222, type: 2}
-    - {fileID: 11400000, guid: 08625b0390868fe44b338bc22c33fb8b, type: 2}
-    - {fileID: 11400000, guid: 4d02f2733be586b4cbfc95eab40f6fbf, type: 2}
+    - {fileID: 11400000, guid: 81a4896aa88ae52479352d976765bbe1, type: 2}
+    - {fileID: 11400000, guid: 9278046d91f67604797d311695f9e6de, type: 2}
     _brainsToControl: []
   maxSteps: 0
   trainingConfiguration:
@@ -375,6 +374,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerActionWarrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515298, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Team2
       objectReference: {fileID: 0}
     - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
         type: 3}
@@ -431,6 +435,96 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515300, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515300, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: agentParameters.resetOnDone
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0bfb76f97b2464e4b835a5c23ff46abc, type: 3}
+--- !u!1001 &2068472828
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8953017345963515298, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerActionWarrior (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515301, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515300, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953017345963515300, guid: 0bfb76f97b2464e4b835a5c23ff46abc,
+        type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 11400000, guid: 81a4896aa88ae52479352d976765bbe1,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bfb76f97b2464e4b835a5c23ff46abc, type: 3}
 --- !u!1001 &4486169801385672430

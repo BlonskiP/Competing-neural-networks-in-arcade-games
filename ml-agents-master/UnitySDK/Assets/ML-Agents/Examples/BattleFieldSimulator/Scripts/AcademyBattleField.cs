@@ -12,7 +12,7 @@ public class AcademyBattleField : Academy
     public Team team2 = new Team(Team.TeamTagEnum.Team2);
     public override void InitializeAcademy()
     {
-
+       
     }
 
     public override void AcademyReset()
