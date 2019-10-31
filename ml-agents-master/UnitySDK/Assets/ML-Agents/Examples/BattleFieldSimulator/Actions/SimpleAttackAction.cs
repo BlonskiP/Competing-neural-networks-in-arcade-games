@@ -12,13 +12,10 @@ public class SimpleAttackAction : Action
 
     public override void Perform(Agent agent, out bool isActionDone, params int[] param)
     {
-        BoxCollider[] edges = agent.GetComponentsInChildren<BoxCollider>();
-        foreach(var edge in edges)
+        SwordAttack attack = agent.GetComponentInChildren<SwordAttack>();
+        if(attack!=null)
         {
-            if(edge.tag=="SwordCollider")
-            {
-                edge.enabled = true;
-            }
+            attack.EnableCollision();
         }
         isActionDone = false;
     }

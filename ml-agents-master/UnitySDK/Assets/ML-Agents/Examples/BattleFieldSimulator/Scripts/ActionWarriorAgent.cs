@@ -12,14 +12,17 @@ public class ActionWarriorAgent : Agent
     public Action actualAction;
     private Action lastAction;
     private Rigidbody rig;
-    public BoxCollider swordEdge;
     private RayPerception3D rayPerc;
     private AcademyBattleField academy;
-    private Team team;
+    public Team team;
     [HideInInspector]
     public bool isActionDone = true;
     int hitCounter = 0;
+    public float health = 100;
+    public float maxHealth = 100;
     public int viewDistance = 30;
+    public bool canTakeDmg = true;
+    private SwordAttack sword;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
         AddReward(-1/5000f);
@@ -65,14 +68,9 @@ public class ActionWarriorAgent : Agent
         anim = GetComponent<Animator>();
         rayPerc = GetComponent<RayPerception3D>();
         rig = GetComponent<Rigidbody>();
-        foreach (var edge in GetComponentsInChildren<BoxCollider>())
-        {
-            if (edge.tag == "SwordCollider")
-            {
-                swordEdge = edge;
-                edge.enabled = false;
-            }
-        }
+        sword = GetComponentInChildren<SwordAttack>();
+        sword.DisableCollision();
+        health = maxHealth;
     }
     public override void CollectObservations()
     {
@@ -88,11 +86,13 @@ public class ActionWarriorAgent : Agent
         Vector3 localVelocity = transform.InverseTransformDirection(rig.velocity);
         AddVectorObs(localVelocity.x);
         AddVectorObs(localVelocity.z);
+        AddVectorObs(health / maxHealth);
     }
     public override void AgentReset()
     {
         base.AgentReset();
         hitCounter = 0;
+        health = maxHealth;
         transform.position = startingPosition;
     }
 
@@ -121,26 +121,48 @@ public class ActionWarriorAgent : Agent
     {
 
     }
-
+    public bool takeDmg(float dmg)
+    {
+        if (canTakeDmg) {
+            if (health > 0)
+            {
+                AddReward(-0.2f);//Panish for taking dmg
+                health -= dmg;
+                if (health < 0)
+                {//Death
+                    AddReward(-1f);
+                    Death();
+                }
+               
+            }
+            return true;
+        }
+        else
+        {
+            AddReward(0.2f);//Reward for defending
+            return false;
+        }
+        
+    }
+    public void Death()
+    {
+        Done();
+    }
     public void DisableAttack()
     {
         this.isActionDone = true;
-        swordEdge.enabled = false;
+        sword.DisableCollision();
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject!=this.gameObject)
-        {
-            if (AcademyBattleField.detectableObjects.Contains(other.tag))
-            {
-                AddReward(actualAction.succesReward);
-                hitCounter++;
-                if(hitCounter>5)
-                {
-                    Done();
-                }
-                
-            }
-        }
+        //Collider[] list = GetComponentsInChildren<Collider>();
+        //if (!list.Contains(other)&&other.enabled) { 
+        //    ActionWarriorAgent warrior = other.GetComponentInParent<ActionWarriorAgent>();
+        //if(warrior!=null && warrior.team.TeamName != team.TeamName)
+        //{
+        //    bool attackSucess = warrior.takeDmg(25);
+        //    if (attackSucess) AddReward(1);
+        //}
+        //}
     }
 }
