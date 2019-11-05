@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Team1Warrior
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 35
+    vectorObservationSize: 85
     numStackedVectorObservations: 1
-    vectorActionSize: 06000000
+    vectorActionSize: 07000000
     cameraResolutions: []
     vectorActionDescriptions:
     - 
     vectorActionSpaceType: 0
-  model: {fileID: 5022602860645237092, guid: d740b564212c45d4d86ac1d4e133d17c, type: 3}
-  inferenceDevice: 1
+  model: {fileID: 5022602860645237092, guid: fed178eab1dc14243a54cddfcc70cf80, type: 3}
+  inferenceDevice: 0

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c53e9925aeaa334e98b07d3ed8f87a6, type: 3}
-  m_Name: SimpleAttackAction
+  m_Script: {fileID: 11500000, guid: bb97d0bf6d5b2f84ca93b70d193a3d82, type: 3}
+  m_Name: DefenseAction
   m_EditorClassIdentifier: 
-  ActionKey: 4
-  succesReward: 3
+  ActionKey: 5
+  succesReward: 1
   AnimationBoolName: 

@@ -11,7 +11,7 @@ namespace MLAgents
     /// </summary>
     public class RayPerception3D : RayPerception
     {
-        Vector3 endPosition;
+        public Vector3 endPosition;
         RaycastHit hit;
         private float[] subList;
 
@@ -52,8 +52,8 @@ namespace MLAgents
                 endPosition.y = endOffset;
                 if (Application.isEditor)
                 {
-                    Debug.DrawRay(transform.position + new Vector3(0f, startOffset, 0f),
-                        endPosition, Color.black, 0.01f, true);
+                    //Debug.DrawRay(transform.position + new Vector3(0f, startOffset, 0f),
+                    //    endPosition, Color.black, 0.01f, true);
                 }
 
                 Array.Clear(subList, 0, subList.Length);

@@ -1,4 +1,6 @@
-﻿using MLAgents;
+﻿using Assets.ML_Agents.Examples.BattleFieldSimulator.Scripts;
+using MLAgents;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,104 +9,124 @@ using UnityEngine;
 public class ActionWarriorAgent : Agent
 {
     Animator anim;
-    Vector3 startingPosition;
+    public float maxHealth = 100;
     public List<Action> actions;
-    public Action actualAction;
-    private Action lastAction;
     private Rigidbody rig;
     private RayPerception3D rayPerc;
+    private WarriorRayPerception sight;
     private AcademyBattleField academy;
-    public Team team;
     [HideInInspector]
     public bool isActionDone = true;
-    int hitCounter = 0;
-    public float health = 100;
-    public float maxHealth = 100;
-    public int viewDistance = 30;
-    public bool canTakeDmg = true;
+    public WarriorInfo WarriorStats;
     private SwordAttack sword;
+    public float staminaRegenRate = 1;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        AddReward(-1/5000f);
+        AddReward(-0.05f);
         int[] actionParams = { };
-        if(isActionDone)
+        if (isActionDone)
         {//can change action
+            ResetTemporaryParameters();
             isActionDone = false;
-            actualAction = actions.Where(a => a.ActionKey==(int)vectorAction[0]).FirstOrDefault();
-                if (actualAction != null)
-                {
-                    actualAction.Perform(this, out isActionDone, actionParams);
-                }
-                else
-                { 
-                    AddReward(-0.3f);//punish for choosing not existing action
-                    isActionDone = true;
-                }
+            WarriorStats.actualAction = actions.Where(a => a.ActionKey == (int)vectorAction[0]).FirstOrDefault();
+            if (WarriorStats.actualAction != null)
+            {
+                WarriorStats.actualAction.Perform(this, out isActionDone, actionParams);
+            }
+            else
+            {
+                AddReward(-0.3f);//punish for choosing not existing action
+                isActionDone = true;
+            }
         }
         else
         {//can't change action
-            if (actualAction != null)
-                actualAction.Continue(this,out isActionDone, actionParams);
+            if (WarriorStats.actualAction != null)
+                WarriorStats.actualAction.Continue(this, out isActionDone, actionParams);
             else
             {
-             AddReward(-0.1f); //punish for continuing not existing action
+                AddReward(-0.1f); //punish for continuing not existing action
             }
         }
     }
+
+    private void ResetTemporaryParameters()
+    {
+        WarriorStats.viewDistance = WarriorStats.MaxViewDistance;
+        WarriorStats.canTakeDmg = true;
+    }
+
     public override void InitializeAgent()
     {
         base.InitializeAgent();
+
         academy = FindObjectOfType<AcademyBattleField>();
-        startingPosition = transform.position;
+        WarriorStats = new WarriorInfo();
+        sight = GetComponent<WarriorRayPerception>();
         if (gameObject.tag == "Team1")
         {
-            team = academy.team1;
+            WarriorStats.team = academy.team1;
         }
         else if (gameObject.tag == "Team2")
         {
-            team = academy.team2;
+            WarriorStats.team = academy.team2;
         }
-        team.registerNewMember(this);
+
         anim = GetComponent<Animator>();
         rayPerc = GetComponent<RayPerception3D>();
         rig = GetComponent<Rigidbody>();
         sword = GetComponentInChildren<SwordAttack>();
         sword.DisableCollision();
-        health = maxHealth;
+
+        WarriorStats.maxHealth = maxHealth;
+        WarriorStats.maxStamina = maxHealth;
+        WarriorStats.stamina = WarriorStats.maxStamina;
+        WarriorStats.health = WarriorStats.maxHealth;
+        WarriorStats.team.registerNewMember(this);
+        WarriorStats.startingPosition = transform.position;
+        WarriorStats.transform = transform;
     }
     public override void CollectObservations()
     {
         base.CollectObservations();
-        if (actualAction != null)
-            AddVectorObs(actualAction.ActionKey);
+        if (WarriorStats.actualAction != null)
+            AddVectorObs(WarriorStats.actualAction.ActionKey);
         else
             AddVectorObs(0);
         AddVectorObs(isActionDone);
-        AddVectorObs(rayPerc.Perceive(viewDistance, AcademyBattleField.rayAngles, AcademyBattleField.detectableObjects, 0, 0));
-        AddVectorObs((int)team.TeamTag);
+      //  AddVectorObs(rayPerc.Perceive(WarriorStats.viewDistance, AcademyBattleField.rayAngles, AcademyBattleField.detectableObjects, 0, 0));
+        AddVectorObs((int)WarriorStats.team.TeamTag);
         AddVectorObs(rig.rotation);
         Vector3 localVelocity = transform.InverseTransformDirection(rig.velocity);
         AddVectorObs(localVelocity.x);
         AddVectorObs(localVelocity.z);
-        AddVectorObs(health / maxHealth);
+        AddVectorObs(transform.forward);
+        AddVectorObs(WarriorStats.health / WarriorStats.maxHealth);
+        AddVectorObs(WarriorStats.canTakeDmg);
+        AddVectorObs(WarriorStats.stamina);
+        AddVectorObs(sight.PerceiveWarriors(WarriorStats.viewDistance, AcademyBattleField.rayAngles, AcademyBattleField.detectableObjects));
+        AddVectorObs((float)WarriorStats.intTeamMemberNumber/WarriorStats.team.TeamMembers.Count);
+       
     }
     public override void AgentReset()
     {
         base.AgentReset();
-        hitCounter = 0;
-        health = maxHealth;
-        transform.position = startingPosition;
+        WarriorStats.health = WarriorStats.maxHealth;
+        WarriorStats.stamina = WarriorStats.maxStamina;
+        WarriorStats.actualAction = null;
+        this.isActionDone = true;
+        transform.position = WarriorStats.startingPosition;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
     private void setAnimation()
     {
-        if (actualAction != null)
-            anim.SetInteger("Action", actualAction.ActionKey);
+        if (WarriorStats.actualAction != null)
+            anim.SetInteger("Action", WarriorStats.actualAction.ActionKey);
         else
             anim.SetInteger("Action", 0);
     }
@@ -115,6 +137,10 @@ public class ActionWarriorAgent : Agent
     }
     private void FixedUpdate()
     {
+        if(WarriorStats.stamina<WarriorStats.maxStamina)
+        {
+            WarriorStats.stamina += staminaRegenRate * Time.deltaTime;
+        }
         setAnimation();
     }
     public void EnableAttack()
@@ -123,26 +149,24 @@ public class ActionWarriorAgent : Agent
     }
     public bool takeDmg(float dmg)
     {
-        if (canTakeDmg) {
-            if (health > 0)
-            {
-                AddReward(-0.2f);//Panish for taking dmg
-                health -= dmg;
-                if (health < 0)
-                {//Death
-                    AddReward(-1f);
-                    Death();
-                }
-               
+        if (WarriorStats.canTakeDmg) {
+
+            AddReward(-0.2f);//Panish for taking dmg
+            WarriorStats.health -= dmg;
+            if (WarriorStats.health <= 0)
+            {//Death
+                //  AddReward(-1f);
+                Death();
             }
             return true;
         }
         else
         {
-            AddReward(0.2f);//Reward for defending
+            float reward = ((maxHealth - WarriorStats.health) / maxHealth + WarriorStats.actualAction.succesReward)/2;
+            AddReward(reward);//Reward for defending
             return false;
         }
-        
+
     }
     public void Death()
     {
@@ -164,5 +188,51 @@ public class ActionWarriorAgent : Agent
         //    if (attackSucess) AddReward(1);
         //}
         //}
+    }
+    private void AddVectorObs(List<Observation> ObsVector)
+    {
+        foreach (var observation in ObsVector)
+        {
+            AddVectorObs(!observation.exist);
+            if (observation.gameObject != null)
+            {
+                if(observation.type.Contains("Team"))//If warrior
+                {
+                    ActionWarriorAgent agent = observation.gameObject.GetComponent<ActionWarriorAgent>();
+                    if(agent!=null)
+                    {
+                        AddVectorObs(0.1f);
+                        AddVectorObs(agent.WarriorStats.health/agent.WarriorStats.maxHealth);
+                        AddVectorObs((int)agent.WarriorStats.team.TeamTag);
+                        if (agent.WarriorStats.actualAction != null)
+                        {
+                            AddVectorObs(agent.WarriorStats.actualAction.ActionKey / 10);
+                        }
+                        else AddVectorObs(0);
+                        
+                        AddVectorObs(agent.WarriorStats.canTakeDmg);
+                        AddVectorObs(WarriorStats.stamina);
+                    }
+                }
+                else if(observation.type.Contains("Wall"))
+                {
+                    AddVectorObs(0.2f);
+                    for (int i = 0; i < 5; i++)
+                        AddVectorObs(0);
+                }
+                else
+                {
+                    AddVectorObs(0.3f);
+                    for (int i = 0; i < 5; i++)
+                        AddVectorObs(0);
+                }
+                AddVectorObs(observation.distance / this.WarriorStats.viewDistance);
+            }
+            else //nothing found
+            {
+                for (int i = 0; i < 7; i++)
+                    AddVectorObs(0);
+            }
+        }
     }
 }

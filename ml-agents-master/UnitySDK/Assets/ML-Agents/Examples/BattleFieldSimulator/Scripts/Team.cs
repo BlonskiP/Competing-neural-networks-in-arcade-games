@@ -7,7 +7,7 @@ public class Team
 {
     public List<Agent> TeamMembers;
     public int aliveMembers = 0;
-    public enum TeamTagEnum { Team1 = 1, Team2 = 2}
+    public enum TeamTagEnum { Team1 = 0, Team2 = 1}
     public TeamTagEnum TeamTag;
     public string TeamName;
     public string EnemyTeamName;
@@ -16,7 +16,7 @@ public class Team
     {
         TeamTag = tag;
         TeamMembers = new List<Agent>();
-        if((int)TeamTag==1)
+        if((int)TeamTag==0)
         {
             TeamName = "Team1";
             EnemyTeamName = "Team2";
@@ -27,9 +27,10 @@ public class Team
             EnemyTeamName = "Team1";
         }
     }
-    public void registerNewMember(Agent agent)
+    public int registerNewMember(Agent agent)
     {
         TeamMembers.Add(agent);
         aliveMembers++;
+        return TeamMembers.Count;
     }
 }

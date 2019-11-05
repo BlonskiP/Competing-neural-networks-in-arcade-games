@@ -7,23 +7,11 @@ public class SwordAttack : MonoBehaviour
 {
     BoxCollider swordBoxCollider;
     public ActionWarriorAgent agent;
-    int hitCounter = 0;
     private void Awake()
     {
         swordBoxCollider = GetComponent<BoxCollider>();
         GetComponent<Collider>().enabled = false;
         agent = GetComponentInParent<ActionWarriorAgent>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void EnableCollision() // Animation Event
@@ -36,18 +24,21 @@ public class SwordAttack : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if(collider.tag==agent.team.EnemyTeamName)
+        if(collider.tag==agent.WarriorStats.team.EnemyTeamName)
         {
             agent.AddReward(1);
             //Debug.Log(Vector3.Distance(agent.transform.position, collider.transform.position).ToString());
             ActionWarriorAgent target = collider.gameObject.GetComponent<ActionWarriorAgent>();
             if (target != null)
             {
-                    if (target.takeDmg(25))
+                    if (target.takeDmg(100))
                     {
-                        agent.AddReward(1f);
-                        if (target.health < 0)
                             agent.AddReward(1f);
+                        if (target.WarriorStats.health < 0)
+                        {
+                            agent.AddReward(1f);
+                        }
+                            
                     }
             }
         }

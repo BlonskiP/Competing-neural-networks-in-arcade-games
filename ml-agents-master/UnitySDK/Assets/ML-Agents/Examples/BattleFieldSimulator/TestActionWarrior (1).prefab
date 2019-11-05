@@ -756,7 +756,7 @@ MonoBehaviour:
   agentParameters:
     agentCameras: []
     agentRenderTextures: []
-    maxStep: 0
+    maxStep: 2000
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 5
@@ -767,10 +767,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f44e27cf48fc7e24c8af8a879a0d3c2a, type: 2}
   - {fileID: 11400000, guid: f568416027692fb40805fefaf5aa64e1, type: 2}
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
+  - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   actualAction: {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   isActionDone: 1
   health: 100
   maxHealth: 100
+  MaxViewDistance: 30
   viewDistance: 20
   canTakeDmg: 1
 --- !u!114 &5016855088160585904
