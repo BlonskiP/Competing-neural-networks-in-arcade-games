@@ -214,6 +214,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &3137248
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1040,6 +1041,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &75617258
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3748,6 +3750,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &480160556
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4134,6 +4137,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &542284234
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4341,6 +4345,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &556703091
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5449,6 +5454,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &702360484
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5686,6 +5692,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &716253867
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6980,6 +6987,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &882178674
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8057,6 +8065,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &1045714018
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9597,6 +9606,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &1249878521
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10310,6 +10320,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &1321961455
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10702,6 +10713,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &1394071664
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16553,6 +16565,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &2138534522
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16728,6 +16741,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!136 &2143304667
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16997,7 +17011,7 @@ PrefabInstance:
     - target: {fileID: 7966053300031338318, guid: 722f9377fdc9c2749864adffc4f807b7,
         type: 3}
       propertyPath: m_Name
-      value: Arena
+      value: Arena duel
       objectReference: {fileID: 0}
     - target: {fileID: 7702231333108610251, guid: 722f9377fdc9c2749864adffc4f807b7,
         type: 3}
@@ -17760,6 +17774,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!4 &6426500168378072677
 Transform:
   m_ObjectHideFlags: 0
@@ -19169,6 +19184,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3b484c002bfe61409b798705b77a844, type: 2}
   - {fileID: 11400000, guid: 3a04ec4b02dd3bf4d81b9a8d231d4220, type: 2}
   isActionDone: 1
+  staminaRegenRate: 1
 --- !u!4 &6426500169805972349
 Transform:
   m_ObjectHideFlags: 0
