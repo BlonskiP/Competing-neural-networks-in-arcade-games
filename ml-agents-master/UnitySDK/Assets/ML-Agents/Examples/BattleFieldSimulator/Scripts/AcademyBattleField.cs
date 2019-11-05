@@ -12,6 +12,7 @@ public class AcademyBattleField : Academy
     public Team team1 = new Team(Team.TeamTagEnum.Team1);
     public Team team2 = new Team(Team.TeamTagEnum.Team2);
     public TeamSpawnPoint[] teamSpawnPoint;
+    private Team winner;
     public override void InitializeAcademy()
     {
         teamSpawnPoint = FindObjectsOfType<TeamSpawnPoint>();
@@ -47,6 +48,10 @@ public class AcademyBattleField : Academy
     public override void AcademyStep()
     {
 
+    }
+
+    public void CheckWinner()
+    {
 
     }
 }
