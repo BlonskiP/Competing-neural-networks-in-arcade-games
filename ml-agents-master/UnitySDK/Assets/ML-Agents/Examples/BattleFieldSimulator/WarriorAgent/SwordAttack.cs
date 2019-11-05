@@ -24,23 +24,28 @@ public class SwordAttack : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if(collider.tag==agent.WarriorStats.team.EnemyTeamName)
+        if (collider.tag == agent.WarriorStats.team.EnemyTeamName)
         {
             agent.AddReward(1);
             //Debug.Log(Vector3.Distance(agent.transform.position, collider.transform.position).ToString());
             ActionWarriorAgent target = collider.gameObject.GetComponent<ActionWarriorAgent>();
             if (target != null)
             {
-                    if (target.takeDmg(100))
+                if (target.takeDmg(100))
+                {
+                    agent.AddReward(1f);
+                    if (target.WarriorStats.health < 0)
                     {
-                            agent.AddReward(1f);
-                        if (target.WarriorStats.health < 0)
-                        {
-                            agent.AddReward(1f);
-                        }
-                            
+                        agent.AddReward(1f);
                     }
+
+                }
             }
+        }
+        else
+            if (collider.tag == agent.WarriorStats.team.TeamName || collider.tag == "ArenaWall")
+        {
+            agent.AddReward(-0.1f);
         }
     }
 
