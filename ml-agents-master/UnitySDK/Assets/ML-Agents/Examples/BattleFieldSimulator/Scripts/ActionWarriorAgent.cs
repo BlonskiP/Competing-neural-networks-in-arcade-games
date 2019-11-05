@@ -77,14 +77,13 @@ public class ActionWarriorAgent : Agent
         rig = GetComponent<Rigidbody>();
         sword = GetComponentInChildren<SwordAttack>();
         sword.DisableCollision();
-
+        WarriorStats.startingPosition = transform.position;
         WarriorStats.maxHealth = maxHealth;
         WarriorStats.maxStamina = maxHealth;
-        WarriorStats.stamina = WarriorStats.maxStamina;
-        WarriorStats.health = WarriorStats.maxHealth;
         WarriorStats.team.registerNewMember(this);
-        WarriorStats.startingPosition = transform.position;
         WarriorStats.transform = transform;
+
+        SetPrimalParameters();
     }
     public override void CollectObservations()
     {
@@ -108,35 +107,44 @@ public class ActionWarriorAgent : Agent
         AddVectorObs((float)WarriorStats.intTeamMemberNumber/WarriorStats.team.TeamMembers.Count);
        
     }
+    public override void AgentOnDone()
+    {
+        base.AgentOnDone();
+        WarriorStats.actualAction = null;
+    }
     public override void AgentReset()
     {
         base.AgentReset();
+        SetPrimalParameters();
+    }
+    public void SetPrimalParameters()
+    {
         WarriorStats.health = WarriorStats.maxHealth;
         WarriorStats.stamina = WarriorStats.maxStamina;
         WarriorStats.actualAction = null;
         this.isActionDone = true;
+        rig.isKinematic = false;
         transform.position = WarriorStats.startingPosition;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     private void setAnimation()
     {
-        if (WarriorStats.actualAction != null)
-            anim.SetInteger("Action", WarriorStats.actualAction.ActionKey);
+        if (WarriorStats.health > 0)
+        {
+            if (WarriorStats.actualAction != null)
+                anim.SetInteger("Action", WarriorStats.actualAction.ActionKey);
+            else
+                anim.SetInteger("Action", 0);
+        }
         else
-            anim.SetInteger("Action", 0);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        //Should not have logic here
+        {
+            anim.SetInteger("Action",-10);//death animation
+        }
+       
     }
     private void FixedUpdate()
     {
+        Debug.Log(WarriorStats.stamina);
         if(WarriorStats.stamina<WarriorStats.maxStamina)
         {
             WarriorStats.stamina += staminaRegenRate * Time.deltaTime;
@@ -154,40 +162,33 @@ public class ActionWarriorAgent : Agent
             AddReward(-0.2f);//Panish for taking dmg
             WarriorStats.health -= dmg;
             if (WarriorStats.health <= 0)
-            {//Death
-                //  AddReward(-1f);
+            {
                 Death();
             }
             return true;
         }
         else
         {
+            if (WarriorStats.health > 0 && WarriorStats.actualAction != null) {
             float reward = ((maxHealth - WarriorStats.health) / maxHealth + WarriorStats.actualAction.succesReward)/2;
             AddReward(reward);//Reward for defending
             return false;
+            }
         }
+        return false;
 
     }
     public void Death()
     {
+        WarriorStats.canTakeDmg = false;
+        isActionDone = true;
+        rig.isKinematic = true;
         Done();
     }
     public void DisableAttack()
     {
         this.isActionDone = true;
         sword.DisableCollision();
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        //Collider[] list = GetComponentsInChildren<Collider>();
-        //if (!list.Contains(other)&&other.enabled) { 
-        //    ActionWarriorAgent warrior = other.GetComponentInParent<ActionWarriorAgent>();
-        //if(warrior!=null && warrior.team.TeamName != team.TeamName)
-        //{
-        //    bool attackSucess = warrior.takeDmg(25);
-        //    if (attackSucess) AddReward(1);
-        //}
-        //}
     }
     private void AddVectorObs(List<Observation> ObsVector)
     {

@@ -18,7 +18,7 @@ public class DefenseAction : Action
             if (actionAgent.WarriorStats.stamina > 10)
             {
                 actionAgent.WarriorStats.canTakeDmg = false;
-                actionAgent.WarriorStats.stamina -= 5;
+                actionAgent.WarriorStats.stamina -= 30 * Time.deltaTime;
             }
         }
         isActionDone = false;
