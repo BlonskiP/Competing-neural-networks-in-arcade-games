@@ -41,7 +41,7 @@ public class AcademyBattleField : Academy
         Agent[] agents = FindObjectsOfType<Agent>();
         foreach(var agent in agents)
         {
-            agent.Done();
+            //agent.Done();
             Destroy(agent.gameObject);
         }
             InitializeSpawners();

@@ -138,6 +138,10 @@ public class ActionWarriorAgent : Agent
         }
        
     }
+    public override void AgentOnDone()
+    {
+        base.AgentOnDone();
+    }
     private void FixedUpdate()
     {
       //  Debug.Log(WarriorStats.stamina);
