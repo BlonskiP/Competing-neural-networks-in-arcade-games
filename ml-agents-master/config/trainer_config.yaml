@@ -15,7 +15,7 @@ default:
     time_horizon: 64
     sequence_length: 64
     summary_freq: 1000
-    use_recurrent: true
+    use_recurrent: false
     vis_encode_type: simple
     reward_signals: 
         extrinsic:
@@ -27,30 +27,30 @@ default:
             encoding_size: 256
             
 Team1Warrior:
-    max_steps: 10.0e5
+    max_steps: 5.0e5
     learning_rate: 1e-3
-    batch_size: 512
+    batch_size: 128
     num_epoch: 3
     buffer_size: 2000
     beta: 1.0e-2
     hidden_units: 256
-    summary_freq: 1000
+    summary_freq: 2000
     time_horizon: 128
     num_layers: 2
     normalize: false
     
 Team2Warrior:
-    max_steps: 10.0e5
+    max_steps: 5.0e5
     learning_rate: 1e-3
-    batch_size: 512
+    batch_size: 128
     num_epoch: 3
     buffer_size: 2000
     beta: 1.0e-2
     hidden_units: 256
-    summary_freq: 1000
+    summary_freq: 2000
     time_horizon: 128
     num_layers: 2
-    normalize: false 
+    normalize: false
     
 BananaLearning:
     normalize: false

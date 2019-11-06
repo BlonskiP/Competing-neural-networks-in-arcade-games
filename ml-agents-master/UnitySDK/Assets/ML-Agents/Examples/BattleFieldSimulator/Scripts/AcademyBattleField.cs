@@ -13,11 +13,12 @@ public class AcademyBattleField : Academy
     public Team team2 = new Team(Team.TeamTagEnum.Team2);
     public TeamSpawnPoint[] teamSpawnPoint;
     private Team winner;
+    private bool isBattleDone = false;
     public override void InitializeAcademy()
     {
         teamSpawnPoint = FindObjectsOfType<TeamSpawnPoint>();
         InitializeSpawners();
-
+        isBattleDone = false;
     }
     public void ResetTeams()
     {
@@ -40,18 +41,45 @@ public class AcademyBattleField : Academy
         Agent[] agents = FindObjectsOfType<Agent>();
         foreach(var agent in agents)
         {
+            agent.Done();
             Destroy(agent.gameObject);
         }
-        InitializeSpawners();
+            InitializeSpawners();
+        
+        isBattleDone = false;
     }
 
     public override void AcademyStep()
     {
-
+        CheckWinner();
     }
 
     public void CheckWinner()
     {
+        if(!team1.hasAliveMembers() || !team2.hasAliveMembers())
+        {
+            isBattleDone = true;
+            if(team1.hasAliveMembers())
+            {
+                winner = team1;
+            }
+            if(team2.hasAliveMembers())
+            {
+                winner = team2;
+            }
+            EndBattle();
+        }
+    }
 
+    private void EndBattle()
+    {
+        if(isBattleDone)
+        {
+            this.Done();
+        }
+        else
+        {
+            throw new NotImplementedException(); //SHOULD NEVER GET HERE
+        }
     }
 }

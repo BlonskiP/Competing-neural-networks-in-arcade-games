@@ -33,4 +33,10 @@ public class Team
         aliveMembers++;
         return TeamMembers.Count;
     }
+    public bool hasAliveMembers()
+    {
+        if (aliveMembers > 0)
+            return true;
+        return false;
+    }
 }

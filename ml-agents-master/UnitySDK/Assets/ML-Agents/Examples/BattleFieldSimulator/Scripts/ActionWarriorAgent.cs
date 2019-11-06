@@ -107,11 +107,7 @@ public class ActionWarriorAgent : Agent
         AddVectorObs((float)WarriorStats.intTeamMemberNumber/WarriorStats.team.TeamMembers.Count);
        
     }
-    public override void AgentOnDone()
-    {
-        base.AgentOnDone();
-        WarriorStats.actualAction = null;
-    }
+
     public override void AgentReset()
     {
         base.AgentReset();
@@ -144,7 +140,7 @@ public class ActionWarriorAgent : Agent
     }
     private void FixedUpdate()
     {
-        Debug.Log(WarriorStats.stamina);
+      //  Debug.Log(WarriorStats.stamina);
         if(WarriorStats.stamina<WarriorStats.maxStamina)
         {
             WarriorStats.stamina += staminaRegenRate * Time.deltaTime;
@@ -180,6 +176,7 @@ public class ActionWarriorAgent : Agent
     }
     public void Death()
     {
+        WarriorStats.team.aliveMembers--;
         WarriorStats.canTakeDmg = false;
         isActionDone = true;
         rig.isKinematic = true;
