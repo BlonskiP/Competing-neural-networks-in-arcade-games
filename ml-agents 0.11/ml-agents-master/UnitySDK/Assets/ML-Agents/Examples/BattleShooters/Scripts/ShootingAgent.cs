@@ -16,13 +16,17 @@ public class ShootingAgent : Agent
     bool isReloading = false;
     float realoadTime=0;
     private LineRenderer lineRender;
+    public Vector3 startingPosition;
     public bool wasShoot = false;
     public int ammo = 50;
     bool isShooting = false;
     public GameObject laserGameObj;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-
+        if(transform.position.y<-5)
+        {
+            Done();
+        }
         lineRender.SetPosition(0, transform.position);
         lineRender.SetPosition(1, transform.position);
         if(wasShoot)
@@ -138,7 +142,7 @@ public class ShootingAgent : Agent
         rayPer = GetComponent<RayPerception3D>();
         lineRender = GetComponent<LineRenderer>();
         SetResetParameters();
-        
+        startingPosition = transform.position;
     }
     public void needToRealoadLaser()
     {
@@ -158,6 +162,7 @@ public class ShootingAgent : Agent
         rig.velocity = Vector3.zero;
         laserGameObj.transform.localScale = new Vector3(0f, 0f, 0f);
         transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
+        transform.position = startingPosition;
         SetResetParameters();
     }
 

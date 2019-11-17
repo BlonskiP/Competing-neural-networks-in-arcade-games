@@ -28,10 +28,7 @@ public class FoodCollectorArea : Area
         {
             if (agent.transform.parent == gameObject.transform)
             {
-                agent.transform.position = new Vector3(Random.Range(-range, range), 2f,
-                    Random.Range(-range, range))
-                    + transform.position;
-                agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
+                resetAgnetPosition(agent);
             }
         }
 
@@ -41,5 +38,12 @@ public class FoodCollectorArea : Area
 
     public override void ResetArea()
     {
+    }
+    public void resetAgnetPosition(GameObject agent)
+    {
+        agent.transform.position = new Vector3(Random.Range(-range, range), 2f,
+                    Random.Range(-range, range))
+                    + transform.position;
+        agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
     }
 }

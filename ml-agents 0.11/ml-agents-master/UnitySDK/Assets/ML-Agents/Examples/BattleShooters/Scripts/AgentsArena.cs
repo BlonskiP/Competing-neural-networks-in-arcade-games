@@ -37,6 +37,11 @@ public class AgentsArena : Area
                     Random.Range(-range, range))
                     + transform.position;
                 agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
+                var shooter = agent.GetComponent<ShootingAgent>();
+                if(shooter != null)
+                {
+                    shooter.startingPosition = agent.transform.position;
+                }
             }
         }
         for(int i=0; i< wallCount; i++)
