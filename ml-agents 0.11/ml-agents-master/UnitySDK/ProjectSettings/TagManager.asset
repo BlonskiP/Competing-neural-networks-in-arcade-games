@@ -32,6 +32,10 @@ TagManager:
   - ArenaWall
   - Team1
   - Team2
+  - Agent
+  - Wall
+  - HealthPack
+  - Ammo
   layers:
   - Default
   - TransparentFX
