@@ -161,6 +161,9 @@ MonoBehaviour:
     numberOfActionsBetweenDecisions: 1
   turnSpeed: 300
   moveSpeed: 2
+  health: 100
+  wasShoot: 0
+  ammo: 50
   laserGameObj: {fileID: 55679838678496779}
 --- !u!114 &55679839946972010
 MonoBehaviour:
@@ -175,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 44
+    vectorObservationSize: 47
     numStackedVectorObservations: 1
     vectorActionSize: 03000000030000000300000002000000
     vectorActionDescriptions: []

@@ -127,6 +127,9 @@ public class ShootingAgent : Agent
         var localVelocity = transform.InverseTransformDirection(rig.velocity);
         AddVectorObs(localVelocity.x);
         AddVectorObs(localVelocity.z);
+        AddVectorObs(health / 200);
+        AddVectorObs(ammo);
+        AddVectorObs(isReloading);
     }
     public override void InitializeAgent()
     {
