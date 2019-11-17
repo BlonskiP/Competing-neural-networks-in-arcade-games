@@ -157,4 +157,13 @@ public class ShootingAgent : Agent
         transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
         SetResetParameters();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        PickUp pickUp = collision.gameObject.GetComponent<PickUp>();
+        if ((pickUp) != null)
+        {
+            pickUp.pickUpEffect(this);
+        }
+    }
 }

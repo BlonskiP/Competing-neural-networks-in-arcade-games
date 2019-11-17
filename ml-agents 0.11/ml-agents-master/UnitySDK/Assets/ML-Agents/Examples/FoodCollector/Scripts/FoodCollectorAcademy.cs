@@ -8,7 +8,7 @@ public class FoodCollectorAcademy : Academy
     public GameObject[] agents;
     [HideInInspector]
     public FoodCollectorArea[] listArea;
-
+   
     public int totalScore;
     public Text scoreText;
     public override void AcademyReset()
