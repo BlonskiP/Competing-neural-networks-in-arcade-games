@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class AmmoPickUp : PickUp
 {
+    public int ammoRestore = 5;
     public override void pickUpEffect(ShootingAgent agent)
     {
-        agent.ammo += 5;
+        if (agent.ammo < agent.maxAmmo- ammoRestore)
+            agent.AddReward(0.2f);
+        agent.ammo += ammoRestore;
+        if (agent.ammo > agent.maxAmmo)
+            agent.ammo = agent.maxAmmo;
         Used();
     }
 }

@@ -36,6 +36,7 @@ TagManager:
   - Wall
   - HealthPack
   - Ammo
+  - Ragent
   layers:
   - Default
   - TransparentFX

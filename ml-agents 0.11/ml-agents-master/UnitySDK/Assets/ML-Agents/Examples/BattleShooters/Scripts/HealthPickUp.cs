@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class HealthPickUp : PickUp
 {
+    public float healthRestore = 25;
     public override void pickUpEffect(ShootingAgent agent)
     {
-        agent.health += 50;
-        if (agent.health > 200)
-            agent.health = 200;
+        if (agent.health < agent.maxHealth-healthRestore)
+            agent.AddReward(0.1f);
+        agent.health += 25;
+        if (agent.health > agent.maxHealth)
+            agent.health = agent.maxHealth;
         Used();
     }
 }

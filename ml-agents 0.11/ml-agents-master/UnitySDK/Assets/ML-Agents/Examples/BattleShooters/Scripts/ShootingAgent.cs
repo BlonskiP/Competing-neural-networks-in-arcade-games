@@ -12,34 +12,42 @@ public class ShootingAgent : Agent
     public float turnSpeed = 300;
     public float moveSpeed = 2;
     const float rayDistance = 100;
+    public float maxHealth = 100;
     public float health = 100;
     bool isReloading = false;
     float realoadTime=0;
     private LineRenderer lineRender;
     public Vector3 startingPosition;
     public bool wasShoot = false;
+    public int maxAmmo = 50;
     public int ammo = 50;
     bool isShooting = false;
     public GameObject laserGameObj;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        if(transform.position.y<-5)
+        base.AgentAction(vectorAction, textAction);
+        if (transform.position.y < -5)
         {
             Done();
         }
         lineRender.SetPosition(0, transform.position);
-        lineRender.SetPosition(1, transform.position);
-        if(wasShoot)
+
+        if (wasShoot)
         {
-            health -= 12.5f;
+            health -= 50f;
             wasShoot = false;
+            AddReward(-0.05f); //panish for being shot
         }
-        if(health<=0){ Done(); }
-        if (Time.time >= realoadTime + 4f)
+        if (health <= 0) {
+            AddReward(-0.5f);  //dying punish
+            Done(); }
+        else { AddReward(0.01f); } //Survival reward
+        if (Time.time >= realoadTime + 10f && isReloading)
         {
             isReloading = false;
+            this.gameObject.tag = "Agent";
         }
-        base.AgentAction(vectorAction, textAction);
+       
         isShooting = false;
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
@@ -106,11 +114,17 @@ public class ShootingAgent : Agent
             RaycastHit hit;
             if (Physics.SphereCast(transform.position, 3f, position, out hit, laserLenght))
             {
-                if (hit.collider.gameObject.CompareTag("Agent"))
+                var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
+                if (agent!=null)
                 {
                     AddReward(1f);
-                    hit.collider.gameObject.GetComponent<ShootingAgent>().wasShoot = true;
+                    agent.wasShoot = true;
                 }
+                else
+                {
+                    AddReward(-0.005f); //punish wasting ammo
+                }
+                
             }
             lineRender.SetPosition(1, hit.point);
             needToRealoadLaser();
@@ -119,6 +133,7 @@ public class ShootingAgent : Agent
         else
         {
             laserGameObj.transform.localScale = new Vector3(0f, 0f, 0f);
+            lineRender.SetPosition(1, transform.position);
         }
         
     }
@@ -126,13 +141,13 @@ public class ShootingAgent : Agent
     {
         base.CollectObservations();
         float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-        string[] detectableObjects = { "agent" , "Wall" , "Ammo" , "HealthPack" };
+        string[] detectableObjects = { "Agent" , "Wall" , "Ammo" , "HealthPack", "Ragent" };
         AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f));
         var localVelocity = transform.InverseTransformDirection(rig.velocity);
         AddVectorObs(localVelocity.x);
         AddVectorObs(localVelocity.z);
         AddVectorObs(health / 200);
-        AddVectorObs(ammo);
+        AddVectorObs(ammo / 50);
         AddVectorObs(isReloading);
     }
     public override void InitializeAgent()
@@ -148,6 +163,7 @@ public class ShootingAgent : Agent
     {
         isReloading = true;
         realoadTime = Time.time;
+        this.gameObject.tag = "Ragent";
     }
     private void SetResetParameters()
     {

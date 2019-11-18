@@ -162,6 +162,7 @@ MonoBehaviour:
   turnSpeed: 300
   moveSpeed: 2
   health: 100
+  startingPosition: {x: 0, y: 0, z: 0}
   wasShoot: 0
   ammo: 50
   laserGameObj: {fileID: 55679838678496779}
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 47
+    vectorObservationSize: 54
     numStackedVectorObservations: 1
     vectorActionSize: 03000000030000000300000002000000
     vectorActionDescriptions: []

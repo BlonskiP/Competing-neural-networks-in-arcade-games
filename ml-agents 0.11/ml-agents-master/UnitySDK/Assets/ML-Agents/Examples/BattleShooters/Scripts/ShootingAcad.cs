@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShootingAcad : Academy
 {
-    public GameObject[] agents;
+    public ShootingAgent[] agents;
     public AgentsArena[] arenas;
     public int ammoPickUpsOnArena = 10;
     public int healthPickUpsOnArena = 10;
@@ -15,11 +15,10 @@ public class ShootingAcad : Academy
         ClearObjects(GameObject.FindGameObjectsWithTag("Ammo"));
         ClearObjects(GameObject.FindGameObjectsWithTag("HealthPack"));
 
-        agents = GameObject.FindGameObjectsWithTag("Agent");
+        agents = FindObjectsOfType<ShootingAgent>();
         arenas = FindObjectsOfType<AgentsArena>();
         foreach (var arena in arenas)
         {
-            
             foreach(var wall in arena.walls)
             {
                 Destroy(wall);

@@ -27,9 +27,9 @@ public class AgentsArena : Area
             f.GetComponent<PickUp>().myArea = this;
         }
     }
-    public void ResetArena(GameObject[] agents)
+    public void ResetArena(ShootingAgent[] agents)
     {
-        foreach (GameObject agent in agents)
+        foreach (ShootingAgent agent in agents)
         {
             if (agent.transform.parent.parent == gameObject.transform)
             {
