@@ -507,7 +507,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 11400000, guid: ff4aeff12567c7543a479eabec3b42a7,
+      objectReference: {fileID: 11400000, guid: a21b3c09c57e0f742b751a9493a41839,
         type: 3}
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
@@ -517,7 +517,7 @@ PrefabInstance:
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
       propertyPath: m_BehaviorName
-      value: Shooter4
+      value: Shooter4PPO
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2844c8e69b3f90c47a8e8948e26480a1, type: 3}
@@ -1283,12 +1283,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 11400000, guid: efc4829d32b5f274ea7eb6b4eee103ce,
+      objectReference: {fileID: 11400000, guid: 1cda0465fe91a0e4093e12a8b6bacda6,
         type: 3}
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
       propertyPath: m_BrainParameters.vectorObservationSize
       value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Shooter1PPO
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2844c8e69b3f90c47a8e8948e26480a1, type: 3}
@@ -1379,7 +1384,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 11400000, guid: 88653ac0da3358d4db758afb3afa898c,
+      objectReference: {fileID: 11400000, guid: bfc9c2795600a2f468404819d5082de8,
         type: 3}
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
@@ -1389,7 +1394,7 @@ PrefabInstance:
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
       propertyPath: m_BehaviorName
-      value: Shooter5
+      value: Shooter5PPO
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2844c8e69b3f90c47a8e8948e26480a1, type: 3}
@@ -1712,7 +1717,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 11400000, guid: b2c595cde36d00e4aa98a37acd2166ac,
+      objectReference: {fileID: 11400000, guid: 1873ebc6a1f739643bca25a6985aa229,
         type: 3}
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
@@ -1722,7 +1727,7 @@ PrefabInstance:
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
       propertyPath: m_BehaviorName
-      value: Shooter3
+      value: Shooter3PPO
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2844c8e69b3f90c47a8e8948e26480a1, type: 3}
@@ -1929,7 +1934,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 11400000, guid: 85232cc96621c4a4eb28d9d1d04bd4c6,
+      objectReference: {fileID: 11400000, guid: ba9d485ce86e56d46a43d6071a1a79ae,
         type: 3}
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
@@ -1939,7 +1944,7 @@ PrefabInstance:
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
       propertyPath: m_BehaviorName
-      value: Shooter6
+      value: Shooter6PPO
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2844c8e69b3f90c47a8e8948e26480a1, type: 3}
@@ -2267,7 +2272,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 11400000, guid: 31f7ccef731cd204c8bb04b65c330232,
+      objectReference: {fileID: 11400000, guid: a9d8f9ed7fdc7d7489468d312aa2726f,
         type: 3}
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
@@ -2277,7 +2282,7 @@ PrefabInstance:
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
       propertyPath: m_BehaviorName
-      value: Shooter2
+      value: Shooter2PPO
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2844c8e69b3f90c47a8e8948e26480a1, type: 3}
@@ -2516,7 +2521,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 11400000, guid: c7effca9f6bad9149a1698b11303dfd1,
+      objectReference: {fileID: 11400000, guid: 65060f8e5d08a594da180099a72ae5d3,
         type: 3}
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
@@ -2526,7 +2531,7 @@ PrefabInstance:
     - target: {fileID: 55679839946972010, guid: 2844c8e69b3f90c47a8e8948e26480a1,
         type: 3}
       propertyPath: m_BehaviorName
-      value: Shooter7
+      value: Shooter7PPO
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2844c8e69b3f90c47a8e8948e26480a1, type: 3}
