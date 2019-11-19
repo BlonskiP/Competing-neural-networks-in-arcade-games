@@ -47,7 +47,7 @@ public class ShootingAgent : Agent
             Debug.Log("Dies" + this.gameObject.name);
             Done();
         }
-        else { AddReward(0.000025f); } //Survival reward
+     //   else { AddReward(0.000025f); } //Survival reward
         
         if (Time.time >= realoadTime + maxRealodTIme && isReloading)
         {
@@ -133,9 +133,9 @@ public class ShootingAgent : Agent
                     if (hit.collider.gameObject.CompareTag("Ragent") || hit.collider.gameObject.CompareTag("Agent"))
                     {
                         AddReward(1f);
-                    }else if(hit.collider.gameObject.CompareTag("Wall"))
+                    }else
                     {
-                        AddReward(-0.1f);
+                        AddReward(-1f);
                     }
                 }
                 lineRender.SetPosition(1, hit.point);
@@ -201,7 +201,7 @@ public class ShootingAgent : Agent
         isShooting = false;
         wasShoot = false;
         health = 100;
-        ammo = 5;
+        ammo = maxAmmo/2;
         lineRender.SetPosition(0, transform.position);
         lineRender.SetPosition(1, transform.position);
         maxlineCounter = 0;

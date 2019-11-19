@@ -8,8 +8,11 @@ public class AgentsArena : Area
     public GameObject healthPickUp;
     public GameObject ammoPickUp;
     public GameObject smallWall;
+    public GameObject target;
     public List<GameObject> walls;
+    public List<GameObject> targets;
     public int wallCount = 10;
+    public int targetCounter = 3;
     public bool pickUpsRespawn = true;
     public float range;
     public AgentsArena()
@@ -50,6 +53,17 @@ public class AgentsArena : Area
                 Random.Range(-range, range)) + transform.position,
                 Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)));
             walls.Add(f);
+        }
+        for (int i = 0; i < targetCounter; i++)
+        {
+            int tagNum = Random.Range(0, 2);
+            GameObject f = Instantiate(target, new Vector3(Random.Range(-range, range), 1f,
+                Random.Range(-range, range)) + transform.position,
+                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)));
+            if (tagNum == 1) 
+                f.tag = "Ragent";
+            else f.tag = "Agent";
+            targets.Add(f);
         }
         var acad = FindObjectOfType<ShootingAcad>();
         if(acad!=null)
