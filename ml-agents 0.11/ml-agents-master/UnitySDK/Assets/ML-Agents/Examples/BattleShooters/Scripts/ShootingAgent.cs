@@ -135,7 +135,7 @@ public class ShootingAgent : Agent
                         AddReward(1f);
                     }else
                     {
-                        AddReward(-1f);
+                        AddReward(-0.1f);
                     }
                 }
                 lineRender.SetPosition(1, hit.point);
