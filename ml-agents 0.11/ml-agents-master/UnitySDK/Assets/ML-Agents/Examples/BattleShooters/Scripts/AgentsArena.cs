@@ -53,9 +53,9 @@ public class AgentsArena : Area
         }
         var acad = FindObjectOfType<ShootingAcad>();
         if(acad!=null)
-        {
-            InitPickUp(acad.ammoPickUpsOnArena, healthPickUp);
-            InitPickUp(acad.healthPickUpsOnArena, ammoPickUp);
+        {   
+            InitPickUp(acad.ammoPickUpsOnArena, ammoPickUp);
+            InitPickUp(acad.healthPickUpsOnArena, healthPickUp);
         }
        
     }

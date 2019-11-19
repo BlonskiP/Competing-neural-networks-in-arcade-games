@@ -10,8 +10,11 @@ public class ShootingAcad : Academy
     public int ammoPickUpsOnArena = 10;
     public int healthPickUpsOnArena = 10;
     public int walls = 10;
+    private int counter = 0;
+    public int setpsToReset = 30000;
     public override void AcademyReset()
     {
+        counter = 0;
         ClearObjects(GameObject.FindGameObjectsWithTag("Ammo"));
         ClearObjects(GameObject.FindGameObjectsWithTag("HealthPack"));
 
@@ -33,6 +36,16 @@ public class ShootingAcad : Academy
         foreach (var pickUps in objects)
         {
             Destroy(pickUps);
+        }
+    }
+
+    public override void AcademyStep()
+    {
+        base.AcademyStep();
+        counter++;
+        if(counter>setpsToReset)
+        {
+            AcademyReset();
         }
     }
 }

@@ -198,7 +198,7 @@ namespace MLAgents
     [RequireComponent(typeof(BehaviorParameters))]
     public abstract class Agent : MonoBehaviour
     {
-        private IPolicy m_Brain;
+        protected IPolicy m_Brain;
         private BehaviorParameters m_PolicyFactory;
 
         /// <summary>

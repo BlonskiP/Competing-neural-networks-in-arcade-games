@@ -8,7 +8,7 @@ default:
     lambd: 0.95
     learning_rate: 1.0e-5
     learning_rate_schedule: linear
-    max_steps: 30.0e4
+    max_steps: 15.0e4
     memory_size: 256
     normalize: false
     num_epoch: 3
@@ -16,7 +16,7 @@ default:
     time_horizon: 64
     sequence_length: 64
     summary_freq: 1000
-    use_recurrent: false
+    use_recurrent: true
     vis_encode_type: simple
     reward_signals:
         extrinsic:
@@ -26,8 +26,16 @@ default:
 Shooter:
     normalize: false
     beta: 5.0e-3
-    batch_size: 256
-    buffer_size: 512
+    batch_size: 2048
+    buffer_size: 20480
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.99
+        curiosity:
+            strength: 0.02
+            gamma: 0.99
+            encoding_size: 256
 
 
 Shooter2:
@@ -35,28 +43,39 @@ Shooter2:
     beta: 5.0e-3
     batch_size: 1024
     buffer_size: 20480
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.8
+        curiosity:
+            strength: 0.02
+            gamma: 0.8
+            encoding_size: 512
+
+
     
 Shooter3:
     normalize: false
     beta: 5.0e-3
-    batch_size: 4096
-    buffer_size: 40960
+    memory_size: 512
+    batch_size: 4048
+    buffer_size: 20480
     
 Shooter4:
-    normalize: false
-    beta: 4.0e-3
+    normalize: true
+    beta: 5.0e-3
     batch_size: 1024
     buffer_size: 20480
-    learning_rate: 1.0e-4
     
 Shooter5:
     normalize: false
-    beta: 5.0e-3
+    beta: 5.0e-2
     batch_size: 1024
+    num_epoch: 4
     buffer_size: 20480
     
 Shooter6:
     normalize: false
     beta: 5.0e-3
-    batch_size: 100
-    buffer_size: 1000
+    batch_size: 1024
+    buffer_size: 10240

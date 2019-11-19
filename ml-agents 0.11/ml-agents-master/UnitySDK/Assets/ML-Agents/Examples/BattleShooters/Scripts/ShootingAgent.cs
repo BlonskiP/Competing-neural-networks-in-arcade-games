@@ -11,39 +11,47 @@ public class ShootingAgent : Agent
     private RayPerception3D rayPer;
     public float turnSpeed = 300;
     public float moveSpeed = 2;
-    const float rayDistance = 100;
+    const float rayDistance = 25;
     public float maxHealth = 100;
     public float health = 100;
     bool isReloading = false;
     float realoadTime=0;
+    float maxRealodTIme = 5;
     private LineRenderer lineRender;
     public Vector3 startingPosition;
     public bool wasShoot = false;
+    public bool destroy = false;
     public int maxAmmo = 50;
     public int ammo = 50;
+    public int maxlineCounter = 100;
+    int lineCounter = 0;
     bool isShooting = false;
-    public GameObject laserGameObj;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
+        
         base.AgentAction(vectorAction, textAction);
         if (transform.position.y < -5)
         {
             Done();
         }
-        lineRender.SetPosition(0, transform.position);
+       
 
         if (wasShoot)
         {
             health -= 50f;
             wasShoot = false;
-            AddReward(-0.05f); //panish for being shot
+            AddReward(-0.15f); //panish for being shot
         }
         if (health <= 0) {
-            AddReward(-0.5f);  //dying punish
-            Done(); }
-        else { AddReward(0.01f); } //Survival reward
-        if (Time.time >= realoadTime + 10f && isReloading)
+            AddReward(-0.2f);  //dying punish
+            Debug.Log("Dies" + this.gameObject.name);
+            Done();
+        }
+        else { AddReward(0.000025f); } //Survival reward
+        
+        if (Time.time >= realoadTime + maxRealodTIme && isReloading)
         {
+            
             isReloading = false;
             this.gameObject.tag = "Agent";
         }
@@ -102,40 +110,54 @@ public class ShootingAgent : Agent
         rig.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
         transform.Rotate(rotateDir, Time.fixedDeltaTime * turnSpeed);
 
-        if (!isReloading && isShooting && ammo>0)
+        if (canShoot() && isShooting)
         {
             ammo -= 1;
             var myTransform = transform;
-            const int laserLenght = 50;
-            laserGameObj.transform.localScale = new Vector3(1f, 1f, laserLenght);
-            var position = myTransform.TransformDirection(RayPerception3D.PolarToCartesian(25f, 90f));
-            Debug.DrawRay(myTransform.position, position, Color.red, 0f, true);
-
+           // var position = myTransform.TransformDirection(RayPerception3D.PolarToCartesian(rayDistance, 90f));
+            var position = transform.position + Vector3.Normalize(transform.forward) * rayDistance;
+          
             RaycastHit hit;
-            if (Physics.SphereCast(transform.position, 3f, position, out hit, laserLenght))
+            bool wasHit = Physics.SphereCast(transform.position, 2f, position, out hit, rayDistance);
+            if (wasHit)
             {
+                Debug.DrawRay(myTransform.position, hit.point, Color.red, 3f, true);
                 var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
-                if (agent!=null)
+                if (agent != null)
                 {
                     AddReward(1f);
                     agent.wasShoot = true;
                 }
                 else
                 {
-                    AddReward(-0.005f); //punish wasting ammo
+                    if (hit.collider.gameObject.CompareTag("Ragent") || hit.collider.gameObject.CompareTag("Agent"))
+                    {
+                        AddReward(1f);
+                    }else if(hit.collider.gameObject.CompareTag("Wall"))
+                    {
+                        AddReward(-0.1f);
+                    }
                 }
-                
+                lineRender.SetPosition(1, hit.point);
+                lineCounter = 0;
+                maxlineCounter = 120;
+            }else
+            {
+                lineRender.SetPosition(1, position);
+                lineCounter = 0;
+                maxlineCounter = 30;
             }
-            lineRender.SetPosition(1, hit.point);
             needToRealoadLaser();
 
         }
-        else
+    }
+    public override void AgentOnDone()
+    {
+        base.AgentOnDone();
+        if(destroy)
         {
-            laserGameObj.transform.localScale = new Vector3(0f, 0f, 0f);
-            lineRender.SetPosition(1, transform.position);
+            DestroyImmediate(this.gameObject);
         }
-        
     }
     public override void CollectObservations()
     {
@@ -146,9 +168,18 @@ public class ShootingAgent : Agent
         var localVelocity = transform.InverseTransformDirection(rig.velocity);
         AddVectorObs(localVelocity.x);
         AddVectorObs(localVelocity.z);
-        AddVectorObs(health / 200);
-        AddVectorObs(ammo / 50);
-        AddVectorObs(isReloading);
+        AddVectorObs(health / maxHealth);
+        AddVectorObs(ammo / maxAmmo);
+        AddVectorObs(canShoot());
+        AddVectorObs(wasShoot);
+    }
+    public bool canShoot()
+    {
+        if(ammo>0 && !isReloading)
+        {
+            return true;
+        }
+        return false;
     }
     public override void InitializeAgent()
     {
@@ -171,12 +202,15 @@ public class ShootingAgent : Agent
         wasShoot = false;
         health = 100;
         ammo = 5;
+        lineRender.SetPosition(0, transform.position);
+        lineRender.SetPosition(1, transform.position);
+        maxlineCounter = 0;
+        lineCounter = 0;
     }
 
     public override void AgentReset()
     {
         rig.velocity = Vector3.zero;
-        laserGameObj.transform.localScale = new Vector3(0f, 0f, 0f);
         transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
         transform.position = startingPosition;
         SetResetParameters();
@@ -188,6 +222,18 @@ public class ShootingAgent : Agent
         if ((pickUp) != null)
         {
             pickUp.pickUpEffect(this);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        lineRender.SetPosition(0, transform.position);
+        lineCounter++;
+        if (maxlineCounter < lineCounter)
+        {
+            lineRender.SetPosition(1, transform.position);
+            lineCounter = 0;
+            maxlineCounter = 0;
         }
     }
 }
