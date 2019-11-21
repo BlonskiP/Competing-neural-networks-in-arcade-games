@@ -8,7 +8,7 @@ public class HealthPickUp : PickUp
     public override void pickUpEffect(ShootingAgent agent)
     {
         if (agent.health < agent.maxHealth-healthRestore)
-            agent.AddReward(0.1f);
+            agent.AddReward(0.05f);
         agent.health += 25;
         if (agent.health > agent.maxHealth)
             agent.health = agent.maxHealth;

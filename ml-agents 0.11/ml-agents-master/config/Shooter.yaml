@@ -4,19 +4,24 @@ default:
     buffer_size: 10240
     hidden_units: 128
     learning_rate_schedule: linear
-    max_steps: 1.0e5
-    memory_size: 256
+    max_steps: 5.0e5
+    memory_size: 1024
     normalize: false
     num_epoch: 3
     num_layers: 2
     time_horizon: 64
     sequence_length: 64
-    summary_freq: 1000
+    summary_freq: 2500
     use_recurrent: true
     reward_signals:
         extrinsic:
             strength: 1.0
             gamma: 0.99
+        curiosity:
+            strength: 0.02
+            gamma: 0.99
+            encoding_size: 256
+            
     lambd: 0.95
 
     epsilon: 0.2

@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class ShootingAgent : Agent
 {
     Rigidbody rig;
+    AgentsArena arena;
     private RayPerception3D rayPer;
     public float turnSpeed = 300;
     public float moveSpeed = 2;
@@ -21,8 +22,8 @@ public class ShootingAgent : Agent
     public Vector3 startingPosition;
     public bool wasShoot = false;
     public bool destroy = false;
-    public int maxAmmo = 50;
-    public int ammo = 50;
+    public int maxAmmo = 10;
+    public int ammo = 0;
     public int maxlineCounter = 100;
     int lineCounter = 0;
     bool isShooting = false;
@@ -30,7 +31,7 @@ public class ShootingAgent : Agent
     {
         
         base.AgentAction(vectorAction, textAction);
-        if (transform.position.y < -5)
+        if (transform.position.y < arena.transform.position.y-1)
         {
             Done();
         }
@@ -135,7 +136,7 @@ public class ShootingAgent : Agent
                         AddReward(1f);
                     }else
                     {
-                        AddReward(-0.1f);
+                     //   AddReward(-0.1f);
                     }
                 }
                 lineRender.SetPosition(1, hit.point);
@@ -184,6 +185,7 @@ public class ShootingAgent : Agent
     public override void InitializeAgent()
     {
         base.InitializeAgent();
+        arena = GetComponentInParent<AgentsArena>();
         rig = GetComponent<Rigidbody>();
         rayPer = GetComponent<RayPerception3D>();
         lineRender = GetComponent<LineRenderer>();
@@ -201,7 +203,7 @@ public class ShootingAgent : Agent
         isShooting = false;
         wasShoot = false;
         health = 100;
-        ammo = maxAmmo/2;
+        ammo = 0;
         lineRender.SetPosition(0, transform.position);
         lineRender.SetPosition(1, transform.position);
         maxlineCounter = 0;

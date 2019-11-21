@@ -275,9 +275,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter1PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -354,9 +375,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter2PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -433,9 +475,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter5PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -512,9 +575,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter4PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -591,9 +675,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter2PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -644,10 +749,10 @@ MonoBehaviour:
   agents: []
   arenas: []
   targets: []
-  ammoPickUpsOnArena: 5
-  healthPickUpsOnArena: 2
+  ammoPickUpsOnArena: 2
+  healthPickUpsOnArena: 1
   walls: 1
-  traingTargets: 0
+  traingTargets: 5
   setpsToReset: 5000
 --- !u!4 &442688835
 Transform:
@@ -735,9 +840,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter4PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -814,9 +940,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter2PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -893,9 +1040,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter1PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -972,9 +1140,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter3PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1051,9 +1240,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter5PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1130,9 +1340,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter5PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1209,9 +1440,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter4PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1288,9 +1540,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter3PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1458,9 +1731,30 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter3PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1537,9 +1831,35 @@ PrefabInstance:
       propertyPath: m_BehaviorName
       value: Shooter1PPO
       objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789784, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b4df6b55b1c34f880b3336f838554,
+        type: 3}
+    - target: {fileID: 4853805195023789763, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.86
+      objectReference: {fileID: 0}
     - target: {fileID: 4853805195023789788, guid: a10dd33558e29504283d98f3417ecc33,
         type: 3}
       propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853805195023789785, guid: a10dd33558e29504283d98f3417ecc33,
+        type: 3}
+      propertyPath: destroy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
