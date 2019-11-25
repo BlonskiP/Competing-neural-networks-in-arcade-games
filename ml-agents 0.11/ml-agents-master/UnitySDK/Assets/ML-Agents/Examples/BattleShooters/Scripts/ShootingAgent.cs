@@ -15,9 +15,10 @@ public class ShootingAgent : Agent
     const float rayDistance = 25;
     public float maxHealth = 100;
     public float health = 100;
+    private float decreaseHealthRate = 1;
     bool isReloading = false;
     float realoadTime=0;
-    float maxRealodTIme = 5;
+    float maxRealodTIme = 2;
     private LineRenderer lineRender;
     public Vector3 startingPosition;
     public bool wasShoot = false;
@@ -41,18 +42,14 @@ public class ShootingAgent : Agent
         {
             health -= 50f;
             wasShoot = false;
-            AddReward(-0.15f); //panish for being shot
         }
         if (health <= 0) {
-            AddReward(-0.2f);  //dying punish
             Debug.Log("Dies" + this.gameObject.name);
             Done();
         }
-     //   else { AddReward(0.000025f); } //Survival reward
         
         if (Time.time >= realoadTime + maxRealodTIme && isReloading)
         {
-            
             isReloading = false;
             this.gameObject.tag = "Agent";
         }
@@ -229,6 +226,7 @@ public class ShootingAgent : Agent
 
     private void FixedUpdate()
     {
+        this.health -= decreaseHealthRate * Time.deltaTime;
         lineRender.SetPosition(0, transform.position);
         lineCounter++;
         if (maxlineCounter < lineCounter)
