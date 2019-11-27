@@ -18,6 +18,7 @@ public class ShootingAgent : Agent
     private float decreaseHealthRate = 1;
     bool isReloading = false;
     float realoadTime=0;
+    float LaserDisplayTime = 0;
     float maxRealodTIme = 2;
     private LineRenderer lineRender;
     public Vector3 startingPosition;
@@ -25,18 +26,21 @@ public class ShootingAgent : Agent
     public bool destroy = false;
     public int maxAmmo = 10;
     public int ammo = 0;
-    public int maxlineCounter = 100;
-    int lineCounter = 0;
     bool isShooting = false;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        
+
         base.AgentAction(vectorAction, textAction);
-        if (transform.position.y < arena.transform.position.y-1)
+        lineRender.SetPosition(0, transform.position);
+        if (transform.position.y < arena.transform.position.y - 1)
         {
             Done();
         }
-       
+        if (Time.time >= LaserDisplayTime + 2)
+        {
+            lineRender.enabled = false;
+            lineRender.SetPosition(1, transform.position);
+        }
 
         if (wasShoot)
         {
@@ -107,50 +111,51 @@ public class ShootingAgent : Agent
         rig.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
         transform.Rotate(rotateDir, Time.fixedDeltaTime * turnSpeed);
 
+        if (rig.velocity.sqrMagnitude > 25f) // slow it down
+        {
+            rig.velocity *= 0.95f;
+        }
+        
         if (canShoot() && isShooting)
         {
             ammo -= 1;
-            var myTransform = transform;
            // var position = myTransform.TransformDirection(RayPerception3D.PolarToCartesian(rayDistance, 90f));
-            var position = transform.position + Vector3.Normalize(transform.forward) * rayDistance;
+            var laserDirection = transform.position + Vector3.Normalize(transform.forward) * rayDistance;
           
             RaycastHit hit;
-            bool wasHit = Physics.SphereCast(transform.position, 2f, position, out hit, rayDistance);
+            bool wasHit = Physics.Raycast(transform.position, laserDirection, out hit, rayDistance);
             if (wasHit)
             {
-                Debug.DrawRay(myTransform.position, hit.point, Color.red, 3f, true);
-                var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
-                if (agent != null)
+                Debug.DrawRay(transform.position, hit.point, Color.red, 1f, true);
+
+                if (hit.collider.gameObject.CompareTag("Ragent") || hit.collider.gameObject.CompareTag("Agent"))
                 {
-                    Debug.Log(agent.gameObject.name + "got hit by:" + this.gameObject.name);
                     AddReward(1f);
-                    agent.wasShoot = true;
-                    if(agent.health<=50)
+                    var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
+                    if (agent != null)
                     {
-                        Debug.Log(agent.gameObject.name + "Will be killed by:" + this.gameObject.name);
-                    }
+                        Debug.Log(agent.gameObject.name + "got hit by:" + this.gameObject.name);
+                        if (agent.health <= 50)
+                        {
+                            agent.wasShoot = true;
+                            Debug.Log(agent.gameObject.name + "Will be killed by:" + this.gameObject.name);
+                        }
+                    }  
                 }
                 else
                 {
-                    if (hit.collider.gameObject.CompareTag("Ragent") || hit.collider.gameObject.CompareTag("Agent"))
-                    {
-                        AddReward(1f);
-                    }else
-                    {
-                     //   AddReward(-0.1f);
-                    }
+                     AddReward(-0.1f);
                 }
                 lineRender.SetPosition(1, hit.point);
-                lineCounter = 0;
-                maxlineCounter = 120;
-            }else
+                lineRender.enabled = true;
+            }
+            else
             {
-                lineRender.SetPosition(1, position);
-                lineCounter = 0;
-                maxlineCounter = 30;
+                AddReward(-0.1f);
+                lineRender.enabled = true;
+                lineRender.SetPosition(1, laserDirection);
             }
             needToRealoadLaser();
-
         }
     }
     public override void AgentOnDone()
@@ -197,6 +202,7 @@ public class ShootingAgent : Agent
     {
         isReloading = true;
         realoadTime = Time.time;
+        LaserDisplayTime = Time.time;
         this.gameObject.tag = "Ragent";
     }
     private void SetResetParameters()
@@ -205,10 +211,9 @@ public class ShootingAgent : Agent
         wasShoot = false;
         health = 100;
         ammo = 0;
+        lineRender.enabled = false;
         lineRender.SetPosition(0, transform.position);
         lineRender.SetPosition(1, transform.position);
-        maxlineCounter = 0;
-        lineCounter = 0;
     }
 
     public override void AgentReset()
@@ -231,13 +236,5 @@ public class ShootingAgent : Agent
     private void FixedUpdate()
     {
         this.health -= decreaseHealthRate * Time.deltaTime;
-        lineRender.SetPosition(0, transform.position);
-        lineCounter++;
-        if (maxlineCounter < lineCounter)
-        {
-            lineRender.SetPosition(1, transform.position);
-            lineCounter = 0;
-            maxlineCounter = 0;
-        }
     }
 }
