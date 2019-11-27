@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myArea: {fileID: 0}
   respawn: 1
-  healthRestore: 25
+  healthRestore: 10
 --- !u!54 &7621512957588031481
 Rigidbody:
   m_ObjectHideFlags: 0

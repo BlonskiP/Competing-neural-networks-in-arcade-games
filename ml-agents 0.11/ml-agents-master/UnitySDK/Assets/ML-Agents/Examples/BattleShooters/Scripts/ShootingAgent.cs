@@ -44,7 +44,6 @@ public class ShootingAgent : Agent
             wasShoot = false;
         }
         if (health <= 0) {
-            Debug.Log("Dies" + this.gameObject.name);
             Done();
         }
         
@@ -123,8 +122,13 @@ public class ShootingAgent : Agent
                 var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
                 if (agent != null)
                 {
+                    Debug.Log(agent.gameObject.name + "got hit by:" + this.gameObject.name);
                     AddReward(1f);
                     agent.wasShoot = true;
+                    if(agent.health<=50)
+                    {
+                        Debug.Log(agent.gameObject.name + "Will be killed by:" + this.gameObject.name);
+                    }
                 }
                 else
                 {
