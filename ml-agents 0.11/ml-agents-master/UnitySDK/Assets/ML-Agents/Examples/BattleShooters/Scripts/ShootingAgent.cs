@@ -237,4 +237,11 @@ public class ShootingAgent : Agent
     {
         this.health -= decreaseHealthRate * Time.deltaTime;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position,transform.forward*10);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, rayDistance);
+    }
 }

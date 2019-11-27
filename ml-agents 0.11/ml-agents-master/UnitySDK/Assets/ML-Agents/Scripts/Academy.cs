@@ -552,7 +552,7 @@ namespace MLAgents
         /// <summary>
         /// Resets the environment, including the Academy.
         /// </summary>
-        void EnvironmentReset()
+        public void EnvironmentReset()
         {
             m_StepCount = 0;
             m_EpisodeCount++;

@@ -10,9 +10,22 @@ abstract public class PickUp : MonoBehaviour
     {
         if (respawn)
         {
-            transform.position = new Vector3(Random.Range(-myArea.range, myArea.range),
+            var newPos = new Vector3(Random.Range(-myArea.range, myArea.range),
                 3f,
                 Random.Range(-myArea.range, myArea.range)) + myArea.transform.position;
+
+            while (Physics.CheckSphere(newPos, 1))
+            {
+                newPos = new Vector3(Random.Range(-myArea.range, myArea.range),
+                3f,
+                Random.Range(-myArea.range, myArea.range)) + myArea.transform.position;
+            }
+            transform.position = newPos;
+            var rig = GetComponent<Rigidbody>();
+            if(rig!=null)
+            {
+                rig.velocity = Vector3.zero;
+            }
         }
         else
         {
