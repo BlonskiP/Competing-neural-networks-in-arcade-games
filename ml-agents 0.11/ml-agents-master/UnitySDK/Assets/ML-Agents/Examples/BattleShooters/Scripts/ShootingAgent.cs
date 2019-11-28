@@ -15,7 +15,7 @@ public class ShootingAgent : Agent
     const float rayDistance = 25;
     public float maxHealth = 100;
     public float health = 100;
-    private float decreaseHealthRate = 1;
+    private float decreaseHealthRate = 2;
     bool isReloading = false;
     float realoadTime=0;
     float LaserDisplayTime = 0;
@@ -27,6 +27,7 @@ public class ShootingAgent : Agent
     public int maxAmmo = 10;
     public int ammo = 0;
     bool isShooting = false;
+    public bool isTreningMode = false;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
 
@@ -44,7 +45,8 @@ public class ShootingAgent : Agent
 
         if (wasShoot)
         {
-            health -= 50f;
+            if(!isTreningMode)
+                health -= 50f;
             wasShoot = false;
         }
         if (health <= 0) {
@@ -115,43 +117,56 @@ public class ShootingAgent : Agent
         {
             rig.velocity *= 0.95f;
         }
-        
+        var laserDirection = transform.position + Vector3.Normalize(transform.forward) * rayDistance;
+        RaycastHit hit;
+        bool wasHit = Physics.Raycast(transform.position, laserDirection, out hit, rayDistance);
+        bool wasThatAgent = false;
+        if (wasHit)
+        {
+            var distance = Vector3.Distance(transform.position, hit.transform.position);
+            wasThatAgent = hit.collider.gameObject.CompareTag("Ragent") || hit.collider.gameObject.CompareTag("Agent");
+            if (wasThatAgent && canShoot() && distance > 2)
+            {
+                
+                AddReward(0.005f); //reward for Aim
+            }
+            else if (hit.collider.gameObject.CompareTag("Wall"))
+            {
+                if ( distance < 1)
+                {
+                    AddReward(-0.001f);
+                }
+                
+            }
+
+        }
         if (canShoot() && isShooting)
         {
-            ammo -= 1;
-           // var position = myTransform.TransformDirection(RayPerception3D.PolarToCartesian(rayDistance, 90f));
-            var laserDirection = transform.position + Vector3.Normalize(transform.forward) * rayDistance;
-          
-            RaycastHit hit;
-            bool wasHit = Physics.Raycast(transform.position, laserDirection, out hit, rayDistance);
+            ammo -= 1;  
             if (wasHit)
             {
                 Debug.DrawRay(transform.position, hit.point, Color.red, 1f, true);
 
-                if (hit.collider.gameObject.CompareTag("Ragent") || hit.collider.gameObject.CompareTag("Agent"))
+                if (wasThatAgent)
                 {
                     AddReward(1f);
                     var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
                     if (agent != null)
                     {
+                        agent.wasShoot = true;
                         Debug.Log(agent.gameObject.name + "got hit by:" + this.gameObject.name);
                         if (agent.health <= 50)
                         {
-                            agent.wasShoot = true;
+                            
                             Debug.Log(agent.gameObject.name + "Will be killed by:" + this.gameObject.name);
                         }
                     }  
-                }
-                else
-                {
-                     AddReward(-0.1f);
                 }
                 lineRender.SetPosition(1, hit.point);
                 lineRender.enabled = true;
             }
             else
             {
-                AddReward(-0.1f);
                 lineRender.enabled = true;
                 lineRender.SetPosition(1, laserDirection);
             }
