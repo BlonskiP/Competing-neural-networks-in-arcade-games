@@ -10,10 +10,10 @@ public class AgentsArena : Area
     public GameObject ammoPickUp;
     public GameObject smallWall;
     public GameObject target;
+    public GameObject objectsContainer;
     public List<GameObject> walls;
     public List<GameObject> targets;
-    public List<GameObject> healthPickUps;
-    public List<GameObject> ammoPickUps;
+    public List<GameObject> pickUps;
     public bool pickUpsRespawn = true;
     public float range;
     public AgentsArena()
@@ -24,14 +24,14 @@ public class AgentsArena : Area
     public void ResetArena(ShootingAgent[] agents)
     {
         var academy = FindObjectOfType<ShootingAcad>();
-
+      //  var wallsArr = GameObject.FindGameObjectsWithTag("Wall");
         DestoryObjects(walls.ToArray());
         DestoryObjects(targets.ToArray());
-        DestoryObjects(healthPickUps.ToArray());
-        DestoryObjects(ammoPickUps.ToArray());
-
-        ammoPickUps = new List<GameObject>();
-        healthPickUps = new List<GameObject>();
+        DestoryObjects(pickUps.ToArray());
+        Destroy(objectsContainer);
+        objectsContainer = new GameObject("Container");
+        objectsContainer.transform.SetParent(transform);
+        pickUps = new List<GameObject>();
         targets = new List<GameObject>();
         walls = new List<GameObject>();
         foreach (ShootingAgent agent in agents)
@@ -54,7 +54,7 @@ public class AgentsArena : Area
         {
             GameObject f = Instantiate(smallWall, new Vector3(Random.Range(-range, range), 1f,
                 Random.Range(-range, range)) + transform.position,
-                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)));
+                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)), objectsContainer.transform);
             walls.Add(f);
         }
         for (int i = 0; i < academy.traingTargets; i++)
@@ -62,7 +62,8 @@ public class AgentsArena : Area
             int tagNum = Random.Range(0, 2);
             GameObject f = Instantiate(target, new Vector3(Random.Range(-range, range), 1f,
                 Random.Range(-range, range)) + transform.position,
-                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)));
+                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)),objectsContainer.transform);
+            
             if (tagNum == 1) 
                 f.tag = "Ragent";
             else f.tag = "Agent";
@@ -78,7 +79,8 @@ public class AgentsArena : Area
     void DestoryObjects(GameObject[] objects)
     {
         foreach(var obj in objects)
-        {
+        { 
+            obj.SetActive(false);
             Destroy(obj);
         }
 
@@ -96,9 +98,10 @@ public class AgentsArena : Area
                 Random.Range(-range, range)) + transform.position;
             }
                 GameObject f = Instantiate(type, newPos ,
-                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)));
+                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)), objectsContainer.transform);
             f.GetComponent<PickUp>().respawn = pickUpsRespawn;
             f.GetComponent<PickUp>().myArea = this;
+            pickUps.Add(f);
         }
     }
 }

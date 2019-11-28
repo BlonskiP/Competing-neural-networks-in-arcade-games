@@ -240,7 +240,7 @@ public class ShootingAgent : Agent
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position,transform.forward*10);
+        Gizmos.DrawRay(transform.position,Vector3.Normalize(transform.forward)*rayDistance);
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, rayDistance);
     }

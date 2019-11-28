@@ -28,5 +28,9 @@ public class ShootingAcad : Academy
     public override void AcademyStep()
     {
         base.AcademyStep();
+        if (GetTotalStepCount()%setpsToReset==0)
+        {
+            AcademyReset();
+        }
     }
 }
