@@ -113,7 +113,7 @@ public class ShootingAgent : Agent
         rig.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
         transform.Rotate(rotateDir, Time.fixedDeltaTime * turnSpeed);
 
-        if (rig.velocity.sqrMagnitude > 10f) // slow it down
+        if (rig.velocity.sqrMagnitude > 5f) // slow it down
         {
             rig.velocity *= 0.95f;
         }
@@ -122,17 +122,16 @@ public class ShootingAgent : Agent
         bool wasHit = Physics.Raycast(transform.position, laserDirection, out hit, rayDistance);
         bool wasThatAgent = false;
         if (wasHit)
-        {
-            var distance = Vector3.Distance(transform.position, hit.transform.position);
+        {   
             wasThatAgent = hit.collider.gameObject.CompareTag("Ragent") || hit.collider.gameObject.CompareTag("Agent");
-            if (wasThatAgent && canShoot() && distance > 2)
+            if (wasThatAgent && canShoot() && hit.distance >= 2)
             {
                 
-                AddReward(0.005f); //reward for Aim
+                AddReward(0.001f); //reward for Aim
             }
             else if (hit.collider.gameObject.CompareTag("Wall"))
             {
-                if ( distance < 1)
+                if (hit.distance <= 1)
                 {
                     AddReward(-0.001f);
                 }
@@ -149,16 +148,17 @@ public class ShootingAgent : Agent
 
                 if (wasThatAgent)
                 {
-                    AddReward(1f);
+                    AddReward(1.5f);
                     var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
                     if (agent != null)
                     {
                         agent.wasShoot = true;
-                        Debug.Log(agent.gameObject.name + "got hit by:" + this.gameObject.name);
+                        if(!isTreningMode)
+                            Debug.Log(agent.gameObject.name + "got hit by:" + this.gameObject.name);
                         if (agent.health <= 50)
                         {
-                            
-                            Debug.Log(agent.gameObject.name + "Will be killed by:" + this.gameObject.name);
+                            if (!isTreningMode)
+                                Debug.Log(agent.gameObject.name + "Will be killed by:" + this.gameObject.name);
                         }
                     }  
                 }
