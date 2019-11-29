@@ -113,7 +113,7 @@ public class ShootingAgent : Agent
         rig.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
         transform.Rotate(rotateDir, Time.fixedDeltaTime * turnSpeed);
 
-        if (rig.velocity.sqrMagnitude > 25f) // slow it down
+        if (rig.velocity.sqrMagnitude > 10f) // slow it down
         {
             rig.velocity *= 0.95f;
         }
