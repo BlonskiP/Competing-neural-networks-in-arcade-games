@@ -4,7 +4,7 @@ default:
     buffer_size: 10240
     hidden_units: 128
     learning_rate_schedule: linear
-    max_steps: 5.0e4
+    max_steps: 5.0e5
     memory_size: 1024
     normalize: false
     num_epoch: 3

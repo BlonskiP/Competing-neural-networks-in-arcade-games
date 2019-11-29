@@ -119,21 +119,21 @@ public class ShootingAgent : Agent
         }
         var laserDirection = transform.position + Vector3.Normalize(transform.forward) * rayDistance;
         RaycastHit hit;
-        bool wasHit = Physics.Raycast(transform.position, laserDirection, out hit, rayDistance);
+        bool wasHit = Physics.SphereCast(transform.position,2f, laserDirection, out hit, rayDistance);
         bool wasThatAgent = false;
         if (wasHit)
         {   
             wasThatAgent = hit.collider.gameObject.CompareTag("Ragent") || hit.collider.gameObject.CompareTag("Agent");
-            if (wasThatAgent && canShoot() && hit.distance >= 2)
+            if (wasThatAgent && canShoot() && hit.distance >= rayDistance/4)
             {
                 
-                AddReward(0.001f); //reward for Aim
+                AddReward(0.0001f); //reward for Aim
             }
             else if (hit.collider.gameObject.CompareTag("Wall"))
             {
                 if (hit.distance <= 1)
                 {
-                    AddReward(-0.001f);
+                    AddReward(-0.0001f);
                 }
                 
             }
@@ -145,10 +145,9 @@ public class ShootingAgent : Agent
             if (wasHit)
             {
                 Debug.DrawRay(transform.position, hit.point, Color.red, 1f, true);
-
                 if (wasThatAgent)
                 {
-                    AddReward(1.5f);
+                    AddReward(2f);
                     var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
                     if (agent != null)
                     {
@@ -184,7 +183,7 @@ public class ShootingAgent : Agent
     public override void CollectObservations()
     {
         base.CollectObservations();
-        float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
+        float[] rayAngles = { 0f,20f, 85.5f,90f,95.5f, 160f, 45f, 135f, 70f, 110f,180f };
         string[] detectableObjects = { "Agent" , "Wall" , "Ammo" , "HealthPack", "Ragent" };
         AddVectorObs(rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f));
         var localVelocity = transform.InverseTransformDirection(rig.velocity);
