@@ -1,0 +1,59 @@
+default:
+    trainer: sac
+    batch_size: 1024 
+    buffer_size: 10240
+    buffer_init_steps: 0
+    hidden_units: 128
+    learning_rate_schedule: linear
+    max_steps: 5.0e5
+    memory_size: 1024
+    normalize: false
+    num_epoch: 3
+    num_layers: 2
+    time_horizon: 64
+    num_update: 1
+    train_interval: 1
+    sequence_length: 64
+    train_interval: 1
+    init_entcoef: 0.05
+    summary_freq: 2500
+    use_recurrent: true
+    reward_signals:
+        extrinsic:
+            strength: 1.0
+            gamma: 0.99
+        curiosity:
+            strength: 0.02
+            gamma: 0.99
+            encoding_size: 256
+            
+    lambd: 0.95
+    tau: 0.005
+    epsilon: 0.2
+    learning_rate: 3.0e-4
+    beta: 5.0e-3
+    vis_encode_type: simple
+
+Shooter1SAC:
+    batch_size: 2180 
+    buffer_size: 102400
+
+Shooter2SAC:
+    batch_size: 2180 
+    buffer_size: 218000
+
+Shooter3SAC:
+    batch_size: 10240 
+    buffer_size: 102400
+  
+Shooter4SAC:
+    batch_size: 10240 
+    buffer_size: 218000
+
+Shooter5SAC:
+    batch_size: 51200 
+    buffer_size: 512000
+    
+Shooter6SAC:
+    batch_size: 320 
+    buffer_size: 20480
