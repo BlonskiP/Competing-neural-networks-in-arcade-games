@@ -9,7 +9,7 @@ public class HealthPickUp : PickUp
     {
         if (agent.health < agent.maxHealth-healthRestore)
             agent.AddReward(0.01f);
-        agent.health += 25;
+        agent.health += healthRestore;
         if (agent.health > agent.maxHealth)
             agent.health = agent.maxHealth;
         Used();

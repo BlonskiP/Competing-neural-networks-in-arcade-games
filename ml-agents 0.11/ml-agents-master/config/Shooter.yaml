@@ -11,8 +11,8 @@ default:
     num_layers: 2
     time_horizon: 64
     sequence_length: 64
-    summary_freq: 2500
-    use_recurrent: true
+    summary_freq: 5000
+    use_recurrent: false
     reward_signals:
         extrinsic:
             strength: 1.0
@@ -29,25 +29,49 @@ default:
     beta: 5.0e-3
 
 Shooter1PPO:
-    batch_size: 218 
+    batch_size: 512 
     buffer_size: 10240
+    
 
 Shooter2PPO:
-    batch_size: 218 
+    batch_size: 1024 
     buffer_size: 21800
 
 Shooter3PPO:
-    batch_size: 1024 
+    batch_size: 2024 
     buffer_size: 10240
   
-Shooter4PPO:
-    batch_size: 1024 
-    buffer_size: 21800
-
-Shooter5PPO:
-    batch_size: 5120 
-    buffer_size: 51200
     
-Shooter6PPO:
-    batch_size: 32 
-    buffer_size: 2048
+Shooter1SAC:
+    vis_encode_type: simple
+    init_entcoef: 0.05
+    trainer: sac
+    batch_size: 256
+    buffer_size: 500000
+    tau: 0.005
+    buffer_init_steps: 0
+    num_update: 1
+    
+Shooter2SAC:
+    vis_encode_type: simple
+    init_entcoef: 0.05
+    trainer: sac
+    batch_size: 256
+    buffer_size: 1000000
+    buffer_init_steps: 0
+    num_update: 1
+    tau: 0.005
+    buffer_init_steps: 0
+    num_update: 1
+
+Shooter3SAC:
+    vis_encode_type: simple
+    init_entcoef: 0.05
+    trainer: sac
+    batch_size: 512
+    buffer_size: 2000000
+    buffer_init_steps: 0
+    num_update: 1
+    tau: 0.005
+    buffer_init_steps: 0
+    num_update: 1

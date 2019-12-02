@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class ShootingAcad : Academy
 {
+    [HideInInspector]
     public ShootingAgent[] agents;
+    [HideInInspector]
     public AgentsArena[] arenas;
+    [HideInInspector]
     public GameObject[] targets;
     public int ammoPickUpsOnArena = 10;
     public int healthPickUpsOnArena = 10;

@@ -8,7 +8,7 @@ public class AmmoPickUp : PickUp
     public override void pickUpEffect(ShootingAgent agent)
     {
         if (agent.ammo < agent.maxAmmo)
-            agent.AddReward(0.2f);
+            agent.AddReward(0.01f);
         agent.ammo += ammoRestore;
         if (agent.ammo > agent.maxAmmo)
             agent.ammo = agent.maxAmmo;

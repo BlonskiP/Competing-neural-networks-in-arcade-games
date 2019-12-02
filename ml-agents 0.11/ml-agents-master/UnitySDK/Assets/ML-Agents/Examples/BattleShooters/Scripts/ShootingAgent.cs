@@ -30,11 +30,12 @@ public class ShootingAgent : Agent
     public bool isTreningMode = false;
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-
+        AddReward(1 / this.agentParameters.maxStep);
         base.AgentAction(vectorAction, textAction);
         lineRender.SetPosition(0, transform.position);
         if (transform.position.y < arena.transform.position.y - 1)
         {
+            AddReward(-1f);//dying punish
             Done();
         }
         if (Time.time >= LaserDisplayTime + 2)
@@ -45,8 +46,7 @@ public class ShootingAgent : Agent
 
         if (wasShoot)
         {
-            if(!isTreningMode)
-                health -= 50f;
+            health -= 50f;
             wasShoot = false;
         }
         if (health <= 0) {
@@ -119,7 +119,7 @@ public class ShootingAgent : Agent
         }
         var laserDirection = transform.position + Vector3.Normalize(transform.forward) * rayDistance;
         RaycastHit hit;
-        bool wasHit = Physics.SphereCast(transform.position,2f, laserDirection, out hit, rayDistance);
+        bool wasHit = Physics.SphereCast(transform.position,0.5f, laserDirection, out hit, rayDistance);
         bool wasThatAgent = false;
         if (wasHit)
         {   
@@ -127,7 +127,7 @@ public class ShootingAgent : Agent
             if (wasThatAgent && canShoot() && hit.distance >= rayDistance/4)
             {
                 
-                AddReward(0.0001f); //reward for Aim
+                AddReward(0.001f); //reward for Aim
             }
             else if (hit.collider.gameObject.CompareTag("Wall"))
             {
@@ -147,7 +147,7 @@ public class ShootingAgent : Agent
                 Debug.DrawRay(transform.position, hit.point, Color.red, 1f, true);
                 if (wasThatAgent)
                 {
-                    AddReward(2f);
+                    AddReward(4f);
                     var agent = hit.collider.gameObject.GetComponent<ShootingAgent>();
                     if (agent != null)
                     {
@@ -223,7 +223,7 @@ public class ShootingAgent : Agent
     {
         isShooting = false;
         wasShoot = false;
-        health = 100;
+        health = maxHealth / 2;
         ammo = 0;
         lineRender.enabled = false;
         lineRender.SetPosition(0, transform.position);
